@@ -1,0 +1,18 @@
+{
+  "development": {
+    "username": "josedelgado",
+    "password": "macros98",
+    "database": "todos",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "josedelgado",
+    "password": "macros98",
+    "database": "todos",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  }
+}
