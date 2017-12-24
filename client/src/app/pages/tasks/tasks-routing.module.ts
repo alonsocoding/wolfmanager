@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TasksComponent } from './tasks.component';
 import { AllTasksComponent } from './all-tasks/all-tasks.component';
+import { MyTasksComponent } from './my-tasks/my-tasks.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,6 +11,9 @@ const routes: Routes = [{
   children: [{
     path: 'all-tasks',
     component: AllTasksComponent,
+  }, {
+    path: 'my-tasks',
+    component: MyTasksComponent,
   }],
 }];
 
@@ -21,5 +25,6 @@ export class TasksRoutingModule { }
 
 export const routedComponents = [
   TasksComponent,
-  AllTasksComponent
+  AllTasksComponent,
+  MyTasksComponent
 ];

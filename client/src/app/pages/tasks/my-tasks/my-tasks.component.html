@@ -1,0 +1,83 @@
+<nb-card>
+  <nb-card-header>
+    <i class="ion-ios-compose-outline"></i> Tasks
+    <button class="btn btn-hero-success btn-add" data-toggle="modal" data-target="#exampleModal">New Task</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" 
+    [source]="source" 
+    (edit)="editProject()"
+    (delete)="deleteProject()">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group row">
+                  <label for="inputName" class="col-sm-3 col-form-label">Task Name</label>
+                  <div class="col-sm-9">
+                    <input name="name" [(ngModel)]="task_register.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
+                  </div>
+                </div>
+                <div class="form-group row">
+                <label for="inputDescription" class="col-sm-3 col-form-label">Task Description</label>
+                <div class="col-sm-9">
+                  <ngx-tiny-mce></ngx-tiny-mce>
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputProjectName" class="col-sm-3 col-form-label">Project</label>
+                    <div class="col-sm-9">
+                    <select class="form-control" name="project_name" [(ngModel)]="task_register.project_name">
+                      <option>Sudoku</option>
+                      <option>Chess</option>
+                      <option>Proaseassa</option>
+                    </select>
+                  </div>
+                  </div>
+                <div class="form-group row">
+                <label for="inputStartDate" class="col-sm-3 col-form-label">Start Date</label>
+                <div class="col-sm-9">
+                  <input name="start_date" [(ngModel)]="task_register.start_date" type="date" class="form-control" id="inputProgress" placeholder="Enter the start date of the task">
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDueDate" class="col-sm-3 col-form-label">Due Date</label>
+                    <div class="col-sm-9">
+                      <input name="due_date" [(ngModel)]="task_register.due_date" type="date" class="form-control" id="inputProgress" placeholder="Enter due date of the task">
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputStatus" class="col-sm-3 col-form-label">Status</label>
+                        <div class="col-sm-9">
+                        <select class="form-control" name="status" [(ngModel)]="task_register.status">
+                          <option>New</option>
+                          <option>In Progress</option>
+                          <option>Completed</option>
+                          <option>On Hold</option>
+                          <option>Cancelled</option>
+                        </select>
+                      </div>
+                      </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" (click)="insert()">Save Project</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

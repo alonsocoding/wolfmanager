@@ -18,6 +18,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     ProjectsModule,
     TasksModule
+
   ],
   declarations: [
     ...PAGES_COMPONENTS,

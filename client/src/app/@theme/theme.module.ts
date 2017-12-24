@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { provideRoutes} from '@angular/router';
+
 import {
   NbActionsModule,
   NbCardModule,
@@ -15,6 +17,7 @@ import {
   NbThemeModule,
   NbUserModule,
   NbCheckboxModule,
+  
 } from '@nebular/theme';
 
 import {
@@ -85,7 +88,7 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES,],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

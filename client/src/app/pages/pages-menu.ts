@@ -43,20 +43,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Tasks',
     icon: 'ion-ios-compose-outline',
-    link: '',
     children: [
       {
         title: 'My Assigned Tasks',
-        link: '/pages/forms/inputs',
+        link: '/pages/tasks/my-tasks',
       },
       {
         title: 'All Project Tasks',
         link: '/pages/tasks/all-tasks',
       },
-      {
+      /*{
         title: 'Archived Tasks',
         link: '/pages/forms/inputs',
-      },
+      },*/
     ]
   },
   /*{

@@ -52,7 +52,7 @@ export class SmartTableComponent {
         title: 'Progress',
         type: 'string',
         valuePrepareFunction: (cell, row) => { return row.progress }
-      },
+      }
     },
   };
 
