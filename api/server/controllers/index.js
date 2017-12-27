@@ -1,13 +1,17 @@
-const todos = require('./todos');
-const todoItems = require('./todoitems');
 const tasks = require('./tasks');
 const projects = require('./projects');
 const projectcategories = require('./projectcategories');
+const files = require('./files');
+const teamroles = require('./teamroles');
+const users = require('./users');
+const teammembers = require('./teammembers');
 
 module.exports = {
-  todos,
-  todoItems,
   tasks,
   projects,
-  projectcategories
+  projectcategories,
+  files,
+  teamroles,
+  users,
+  teammembers
 };

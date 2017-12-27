@@ -38,6 +38,15 @@ const routes: Routes = [{
     path: 'tasks',
     loadChildren: './tasks/tasks.module#TasksModule',
   }, {
+    path: 'calendar',
+    loadChildren: './calendar/calendar.module#CalendarModule',
+  }, {
+    path: 'files',
+    loadChildren: './files/files.module#FilesModule',
+  }, {
+    path: 'teams',
+    loadChildren: './teams/teams.module#TeamsModule',
+  }, {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

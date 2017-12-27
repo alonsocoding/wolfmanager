@@ -1,0 +1,73 @@
+<nb-card>
+  <nb-card-header>
+    <i class="ion-ios-compose-outline"></i> Members
+    <button class="btn btn-hero-success btn-add" data-toggle="modal" data-target="#exampleModal">New Member</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject()">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Member</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label for="inputFirstName" class="col-sm-3 col-form-label">First Name</label>
+            <div class="col-sm-9">
+              <input name="first_name" [(ngModel)]="user_register.first_name" type="name" class="form-control" id="inputFirstName" placeholder="Enter the first name of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputLastName" class="col-sm-3 col-form-label">Last Name</label>
+            <div class="col-sm-9">
+              <input name="last_name" [(ngModel)]="user_register.last_name" type="name" class="form-control" id="inputLastName" placeholder="Enter the last name of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputUsername" class="col-sm-3 col-form-label">Username</label>
+            <div class="col-sm-9">
+              <input name="username" [(ngModel)]="user_register.username" type="name" class="form-control" id="inputUsername" placeholder="Enter the username of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input name="email" [(ngModel)]="user_register.email" type="name" class="form-control" id="inputEmail" placeholder="Enter the email of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input name="password" [(ngModel)]="user_register.password" type="name" class="form-control" id="inputPassword" placeholder="Enter the password of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputRole" class="col-sm-3 col-form-label">Role</label>
+            <div class="col-sm-9">
+              <input name="role" [(ngModel)]="user_register.role" type="name" class="form-control" id="inputRole" placeholder="Enter the role of the member">
+            </div>
+          </div>
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="insert()">Save Member</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

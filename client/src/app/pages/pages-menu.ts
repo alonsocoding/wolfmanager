@@ -25,21 +25,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },
-  /*{
+  {
     title: 'Calendar',
     icon: 'ion-ios-calendar-outline',
-    link: '',
     children: [
-      {
-        title: 'Your Events',
-        link: '/pages/forms/inputs',
-      },
+      //{
+      //  title: 'My Events',
+      //  link: '/pages/calendar/inputs',
+      //},
       {
         title: 'All Events',
-        link: '/pages/forms/inputs',
+        link: '/pages/calendar/all-events',
       },
     ]
-  },*/
+  },
   {
     title: 'Tasks',
     icon: 'ion-ios-compose-outline',
@@ -58,44 +57,41 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },*/
     ]
   },
-  /*{
+  {
     title: 'File Manager',
     icon: 'ion-ios-copy-outline',
-    link: '',
     children: [
       {
         title: 'My Project Files',
-        link: '/pages/forms/inputs',
+        link: '/pages/files/my-files',
       },
       {
         title: 'All Project Files',
-        link: '/pages/forms/inputs',
+        link: '/pages/files/all-files',
       },
     ]
   },
   {
     title: 'Team',
     icon: 'ion-ios-people-outline',
-    link: '',
     children: [
       {
-        title: 'My Team',
-        link: '/pages/forms/inputs',
+        title: 'Members',
+        link: '/pages/teams/members',
       },
       {
         title: 'All Teams',
-        link: '/pages/forms/inputs',
+        link: '/pages/teams/teammembers',
       },
       {
         title: 'Team Roles',
-        link: '/pages/forms/inputs',
+        link: '/pages/teams/teamroles',
       },
     ]
   },
   {
     title: 'Timer',
     icon: 'ion-ios-timer-outline',
-    link: '',
     children: [
       {
         title: 'My Timers',
@@ -111,10 +107,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },
-  {
+  /*{
     title: 'Tickets',
     icon: 'ion-ios-paperplane-outline',
-    link: '',
     children: [
       {
         title: 'Tickets',
@@ -133,11 +128,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/inputs',
       },
     ]
-  },
+  },*/
   {
     title: 'Finance',
     icon: 'ion-ios-calculator-outline',
-    link: '',
     children: [
       {
         title: 'My Finance',
@@ -152,10 +146,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/inputs',
       }]
   },
-  {
+  /*{
     title: 'Invoices',
     icon: 'ion-ios-pricetags-outline',
-    link: '',
     children: [
       {
         title: 'All Invoices',
@@ -177,11 +170,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'My Invoices',
         link: '/pages/forms/inputs',
       }]
-  },
+  },*/
   {
     title: 'Notes',
     icon: 'ion-ios-photos-outline',
-    link: '',
     children: [
       {
         title: 'All Notes',
@@ -192,10 +184,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/inputs',
       }]
   },
-  {
+  /*{
     title: 'Leads',
     icon: 'ion-ios-monitor-outline',
-    link: '',
     children: [
       {
         title: 'Leads',
@@ -217,7 +208,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Services',
     icon: 'ion-ios-briefcase-outline',
-    link: '',
     children: [
       {
         title: 'Services',
@@ -227,11 +217,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Orders',
         link: '/pages/forms/inputs',
       }]
-  },
+  },*/
   {
     title: 'Reports',
     icon: 'ion-ios-list-outline',
-    link: '',
     children: [
       {
         title: 'Tickets Reports',
@@ -258,7 +247,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Settings',
     icon: 'ion-ios-gear-outline',
-    link: '',
+    link: '/pages/maps/gmaps',
   },
 
   /*

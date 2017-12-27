@@ -1,0 +1,80 @@
+<nb-card>
+  <nb-card-header>
+    <i class="ion-ios-compose-outline"></i> Files
+    <button class="btn btn-hero-success btn-add" data-toggle="modal" data-target="#exampleModal">New File</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" 
+    [source]="source" 
+    (edit)="editProject()"
+    (delete)="deleteProject()">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New File</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group row">
+                  <label for="inputName" class="col-sm-3 col-form-label">File Name</label>
+                  <div class="col-sm-9">
+                    <input name="name" [(ngModel)]="file_register.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputFile" class="col-sm-3 col-form-label">File</label>
+                  <div class="col-sm-9">
+                    <div class="input-group">
+                      <input name="icon" [(ngModel)]="file_register.file" type="text" class="form-control" placeholder="Select a file">
+                      <span class="input-group-btn">
+                        <button class="btn btn-info">
+                          Select File
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                <label for="inputNotes" class="col-sm-3 col-form-label">Notes</label>
+                <div class="col-sm-9">
+                  <ngx-tiny-mce></ngx-tiny-mce>
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputProjectName" class="col-sm-3 col-form-label">Project</label>
+                    <div class="col-sm-9">
+                    <select class="form-control" name="project_name" [(ngModel)]="file_register.project">
+                      <option>Sudoku</option>
+                      <option>Chess</option>
+                      <option>Proaseassa</option>
+                    </select>
+                  </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputFolderName" class="col-sm-3 col-form-label">Folder</label>
+                    <div class="col-sm-9">
+                    <select class="form-control" name="folder_name" [(ngModel)]="file_register.folder">
+                      <option>None</option>
+                    </select>
+                  </div>
+                  </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" (click)="insert()">Save Project</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

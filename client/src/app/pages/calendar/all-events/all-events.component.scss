@@ -1,0 +1,9 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/bootstrap/buttons';
+@import "~fullcalendar/dist/fullcalendar.min.css";
+
+@include nb-install-component() {
+    .btn-add {
+        float: right;
+    }
+}

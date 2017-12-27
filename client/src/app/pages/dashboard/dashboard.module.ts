@@ -22,6 +22,8 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ChartjsLineComponent } from './chartjs/chartjs-line.component';
+import { ChartjsPieComponent } from './chartjs/chartjs-pie.component';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartModule } from 'angular2-chartjs';
 
@@ -52,7 +54,8 @@ import { ChartModule } from 'angular2-chartjs';
     TrafficChartComponent,
     ProjectsComponent,
     TasksComponent,
-    ChartjsLineComponent
+    ChartjsLineComponent,
+    ChartjsPieComponent
   ],
 })
 export class DashboardModule { }

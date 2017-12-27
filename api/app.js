@@ -5,6 +5,11 @@ const bodyParser = require('body-parser');
 var project_routes = require('./server/routes/project');
 var task_routes = require('./server/routes/task');
 var projectcategory_routes = require('./server/routes/projectcategory');
+var file_routes = require('./server/routes/file');
+var teamrole_routes = require('./server/routes/teamrole');
+var user_routes = require('./server/routes/user');
+var teammember_routes = require('./server/routes/teammember');
+
 
 const app = express();
 app.use(logger('dev'));
@@ -27,5 +32,9 @@ app.use((req, res, next) => {
 app.use('/api', project_routes);
 app.use('/api', task_routes);
 app.use('/api', projectcategory_routes);
+app.use('/api', file_routes);
+app.use('/api', teamrole_routes);
+app.use('/api', user_routes);
+app.use('/api', teammember_routes);
 
 module.exports = app;

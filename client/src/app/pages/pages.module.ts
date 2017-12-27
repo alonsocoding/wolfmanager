@@ -6,6 +6,10 @@ import { ProjectsModule } from './projects/projects.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { TasksModule } from './tasks/tasks.module';
+import { CalendarModule } from './calendar/calendar.module';
+import { FilesModule } from './files/files.module';
+import { TeamsModule } from './teams/teams.module';
+
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -17,7 +21,10 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     ProjectsModule,
-    TasksModule
+    TasksModule,
+    CalendarModule,
+    FilesModule,
+    TeamsModule
 
   ],
   declarations: [
