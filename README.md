@@ -3,7 +3,7 @@
 This software was build to help managers to take control of the projects they have, and
 make it easier to work in an easy to use enviroment, this new model is different and better in opinion of many managers that want to use a tool that is not complicated and is complete, it is friendly and powerfull, it include some good features to manage every member in the team and every task they have, you have the control of every aspect of your projects and teams, is the best software for management.
 
-![captura de pantalla 2017-12-24 a la s 11 08 56](https://user-images.githubusercontent.com/17972120/34328090-e5e953b6-e89a-11e7-8c19-52540ab6abd7.png)
+![captura de pantalla 2017-12-27 a la s 09 37 24](https://user-images.githubusercontent.com/17972120/34396355-57f3bf46-eb2f-11e7-9e49-721683d82a0b.png)
 
 ## Tools
 The tool used to develop this project are:
