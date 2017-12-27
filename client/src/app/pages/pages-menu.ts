@@ -135,15 +135,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'My Finance',
-        link: '/pages/forms/inputs',
+        link: '/pages/finances/my-finances',
       },
       {
         title: 'All Finance',
-        link: '/pages/forms/inputs',
+        link: '/pages/finances/all-finances',
       },
       {
         title: 'Categories',
-        link: '/pages/forms/inputs',
+        link: '/pages/finances/categories',
       }]
   },
   /*{
@@ -176,12 +176,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'ion-ios-photos-outline',
     children: [
       {
-        title: 'All Notes',
-        link: '/pages/forms/inputs',
+        title: 'My Notes',
+        link: '/pages/notes/my-notes',
       },
       {
-        title: 'Project Notes',
-        link: '/pages/forms/inputs',
+        title: 'All Notes',
+        link: '/pages/notes/all-notes',
       }]
   },
   /*{
@@ -218,7 +218,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/inputs',
       }]
   },*/
-  {
+  /*{
     title: 'Reports',
     icon: 'ion-ios-list-outline',
     children: [
@@ -238,7 +238,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Invoices Reports',
         link: '/pages/forms/inputs',
       }]
-  },
+  },*/
   {
     title: 'Maps',
     icon: 'ion-ios-location-outline',

@@ -5,6 +5,9 @@ const files = require('./files');
 const teamroles = require('./teamroles');
 const users = require('./users');
 const teammembers = require('./teammembers');
+const financecategories = require('./financecategories');
+const entries = require('./entries');
+const notes = require('./notes');
 
 module.exports = {
   tasks,
@@ -13,5 +16,8 @@ module.exports = {
   files,
   teamroles,
   users,
-  teammembers
+  teammembers,
+  financecategories,
+  entries,
+  notes
 };

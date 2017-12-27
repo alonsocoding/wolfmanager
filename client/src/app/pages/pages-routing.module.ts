@@ -14,9 +14,6 @@ const routes: Routes = [{
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {
-    path: 'components',
-    loadChildren: './components/components.module#ComponentsModule',
-  }, {
     path: 'maps',
     loadChildren: './maps/maps.module#MapsModule',
   }, {
@@ -46,6 +43,12 @@ const routes: Routes = [{
   }, {
     path: 'teams',
     loadChildren: './teams/teams.module#TeamsModule',
+  }, {
+    path: 'finances',
+    loadChildren: './finances/finances.module#FinancesModule',
+  }, {
+    path: 'notes',
+    loadChildren: './notes/notes.module#NotesModule',
   }, {
     path: '',
     redirectTo: 'dashboard',
