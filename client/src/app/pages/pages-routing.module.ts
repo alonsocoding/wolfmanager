@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [{
   path: '',
@@ -11,23 +12,11 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
   }, {
-    path: 'ui-features',
-    loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
-  }, {
     path: 'maps',
     loadChildren: './maps/maps.module#MapsModule',
   }, {
     path: 'charts',
     loadChildren: './charts/charts.module#ChartsModule',
-  }, {
-    path: 'editors',
-    loadChildren: './editors/editors.module#EditorsModule',
-  }, {
-    path: 'forms',
-    loadChildren: './forms/forms.module#FormsModule',
-  }, {
-    path: 'tables',
-    loadChildren: './tables/tables.module#TablesModule',
   }, {
     path: 'projects',
     loadChildren: './projects/projects.module#ProjectsModule',
@@ -49,6 +38,9 @@ const routes: Routes = [{
   }, {
     path: 'notes',
     loadChildren: './notes/notes.module#NotesModule',
+  }, {
+    path: 'settings',
+    component: SettingsComponent,
   }, {
     path: '',
     redirectTo: 'dashboard',

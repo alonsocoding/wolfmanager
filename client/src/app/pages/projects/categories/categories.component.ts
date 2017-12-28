@@ -6,6 +6,36 @@ import { ProjectCategoryService } from '../../../services/projectcategory.servic
 import { ProjectCategory } from '../../../models/ProjectCategory';
 
 import { SmartTableService } from '../../../@core/data/smart-table.service';
+
+import { OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ViewCell } from 'ng2-smart-table';
+
+@Component({
+  selector: 'button-view',
+  styleUrls: ['./categories.component.scss'],
+  template: `
+  <input class="form-control" type="color" value="{{renderValue}}"  disabled>
+  `,
+})
+export class ButtonViewComponent implements ViewCell, OnInit {
+  renderValue: string;
+
+  @Input() value: string | number;
+  @Input() rowData: any;
+
+  @Output() save: EventEmitter<any> = new EventEmitter();
+
+  ngOnInit() {
+    this.renderValue = this.value.toString().toUpperCase();
+  }
+
+  onClick() {
+    this.save.emit(this.rowData);
+  }
+}
+
+
+
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './categories.component.html',
@@ -25,7 +55,7 @@ export class CategoryComponent {
       add: false,
     },
     edit: {
-      editButtonContent: '<i class="nb-search" (click)="editProject()"></i>',
+      editButtonContent: '<i class="nb-edit" (click)="editProject()"></i>',
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -38,7 +68,8 @@ export class CategoryComponent {
       },
       color: {
         title: 'Project Category Color',
-        type: 'string',
+        type: 'custom',
+        renderComponent: ButtonViewComponent
       },
     },
   };

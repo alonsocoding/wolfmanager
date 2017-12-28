@@ -74,27 +74,11 @@
     <nb-card class="solar-card">
       <nb-card-header>Projects</nb-card-header>
       <nb-card-body>
-
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-xxs12 col-md-12 col-lg-8">
-    <nb-card class="solar-card">
-      <nb-card-header>Invoices</nb-card-header>
-      <nb-card-body>
-
-      </nb-card-body>
-    </nb-card>
-  </div>
-  <div class="col-xxs12 col-md-12 col-lg-4">
-    <nb-card class="solar-card">
-      <nb-card-header>Next Events</nb-card-header>
-      <nb-card-body>
-
+          <ng2-smart-table [settings]="settings" 
+          [source]="source" 
+          (edit)="editProject()"
+          (delete)="deleteProject()">
+          </ng2-smart-table>
       </nb-card-body>
     </nb-card>
   </div>

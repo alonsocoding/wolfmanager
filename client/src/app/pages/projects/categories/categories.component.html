@@ -5,45 +5,42 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" 
-    [source]="source" 
-    (edit)="editProject()"
-    (delete)="deleteProject()">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject()">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group row">
-                  <label for="inputName" class="col-sm-3 col-form-label">Category Name</label>
-                  <div class="col-sm-9">
-                    <input name="name" [(ngModel)]="projectcategory_register.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the category">
-                  </div>
-                </div>
-                <div class="form-group row">
-                <label for="inputProgress" class="col-sm-3 col-form-label">Color</label>
-                <div class="col-sm-9">
-                  <input name="progress" [(ngModel)]="projectcategory_register.progress" type="progress" class="form-control" id="inputProgress" placeholder="Enter the color of use">
-                </div>
-                </div>
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" (click)="insert()">Save Category</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-3 col-form-label">Category Name</label>
+            <div class="col-sm-9">
+              <input name="name" [(ngModel)]="projectcategory_register.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the category">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputProgress" class="col-sm-3 col-form-label">Color</label>
+            <div class="col-sm-9">
+              <input type="color" class="form-control" id="exampleInputColor1" name="color" [(ngModel)]="projectcategory_register.color" >
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="insert()">Save Category</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>

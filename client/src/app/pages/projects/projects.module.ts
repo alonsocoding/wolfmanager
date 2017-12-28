@@ -8,6 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const components = [
 ];
 
+import { ButtonViewComponent } from './categories/categories.component';
+import { ImageViewComponent } from './smart-table/smart-table.component';
+
 @NgModule({
   imports: [
     ThemeModule,
@@ -17,7 +20,13 @@ const components = [
   ],
   declarations: [
     ...routedComponents,
-    ...components
+    ...components,
+    ButtonViewComponent,
+    ImageViewComponent
+  ],
+  entryComponents: [
+    ButtonViewComponent,
+    ImageViewComponent
   ],
   providers: [
     SmartTableService,
