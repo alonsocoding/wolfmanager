@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DatabaseComponent } from './database/database.component';
 
 const routes: Routes = [{
   path: '',
@@ -41,6 +42,9 @@ const routes: Routes = [{
   }, {
     path: 'settings',
     component: SettingsComponent,
+  }, {
+    path: 'database',
+    component: DatabaseComponent,
   }, {
     path: '',
     redirectTo: 'dashboard',

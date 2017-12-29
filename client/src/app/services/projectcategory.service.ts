@@ -36,6 +36,17 @@ export class ProjectCategoryService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.get(this.url+'projectcategory/list', options)
 						 .map(res => res.json());
+    }
+    
+    // Delete a single Project Category
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'projectcategory/delete/'+id, options)
+						 .map(res => res.json());
 	}
 
 }

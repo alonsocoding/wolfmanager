@@ -10,6 +10,8 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
 
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'button-view',
   styleUrls: ['./categories.component.scss'],
@@ -114,6 +116,11 @@ export class CategoryComponent {
         let projectcategory = response.projectcategory;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Project has been saved',
+          showConfirmButton: false,
+        })
         if(!projectcategory) { } else {
           this.projectcategory_register = projectcategory;
           this.projectcategory_register = new ProjectCategory('','');
@@ -148,7 +155,30 @@ export class CategoryComponent {
     console.log("edit");
   } 
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    swal({
+      title: 'Delete the project category?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your project category has been deleted.',
+          'success'
+        )
+        this._projectCategoryService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }	
+        );
+      }
+    })
   }
+
 }

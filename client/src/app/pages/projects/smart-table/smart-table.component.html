@@ -8,7 +8,7 @@
     <ng2-smart-table [settings]="settings" 
     [source]="source" 
     (edit)="editProject()"
-    (delete)="deleteProject()">
+    (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
@@ -56,17 +56,15 @@
                 <div class="form-group row">
                   <label for="inputProgress" class="col-sm-3 col-form-label">Category</label>
                   <div class="col-sm-9">
-                  <select class="form-control" name="category" [(ngModel)]="project_register.category">
-                    <option>In Progress</option>
-                    <option>Completed</option>
-                    <option>Cancelled</option>
-                  </select>
+                      <select (change)="changeCategory(category)" #selectTipo="ngModel" name="category" [(ngModel)]="category" class="form-control">
+                          <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
+                      </select>
                 </div>
                 </div>
               </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" (click)="insert()">Save Project</button>
+          <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Project</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>

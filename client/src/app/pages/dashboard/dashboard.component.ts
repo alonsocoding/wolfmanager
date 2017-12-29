@@ -42,8 +42,8 @@ export class DashboardComponent {
         title: 'Progress',
         type: 'html',
         valuePrepareFunction: (cell, row) => {
-          return `<div class="progress">
-        <div class="progress-bar" role="progressbar" width="30" aria-valuenow="32" aria-valuemin="0" aria-valuemax="32">${row.progress}</div></div>`
+          return `
+        <div class="progress-bar" role="progressbar" width="30" aria-valuenow="32" aria-valuemin="0" aria-valuemax="32">${row.progress}</div>`
         }
       }
     },
@@ -85,7 +85,6 @@ export class DashboardComponent {
           {user: this.users.eva, type: 'home'},
           {user: this.users.jack, type: 'mobile'},
           {user: this.users.lee, type: 'mobile'},
-          {user: this.users.alan, type: 'home'},
         ];
   }
 

@@ -5,7 +5,7 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject()">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>

@@ -10,6 +10,7 @@ import { CalendarModule } from './calendar/calendar.module';
 import { FilesModule } from './files/files.module';
 import { TeamsModule } from './teams/teams.module';
 import { SettingsModule } from './settings/settings.module';
+import { DatabaseModule } from './database/database.module';
 
 
 const PAGES_COMPONENTS = [
@@ -26,7 +27,8 @@ const PAGES_COMPONENTS = [
     CalendarModule,
     FilesModule,
     TeamsModule,
-    SettingsModule
+    SettingsModule,
+    DatabaseModule
 
   ],
   declarations: [

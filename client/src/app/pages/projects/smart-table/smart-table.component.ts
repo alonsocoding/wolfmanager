@@ -5,10 +5,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../models/Project';
 
+import { ProjectCategoryService } from '../../../services/projectcategory.service';
+import { ProjectCategory } from '../../../models/ProjectCategory';
+
 import { UserService } from '../../../@core/data/users.service';
 
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 
+import swal from 'sweetalert2';
 
 import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
@@ -42,7 +46,7 @@ export class ImageViewComponent implements ViewCell, OnInit {
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './smart-table.component.html',
-  providers: [ProjectService],
+  providers: [ProjectService, ProjectCategoryService],
   styleUrls: ['./smart-table.component.scss'],
 })
 
@@ -80,7 +84,7 @@ export class SmartTableComponent {
         title: 'Category',
         type: 'html',
         valuePrepareFunction: (cell, row) => {
-          return `<span class="badge badge-primary">${row.category}</span>`;
+          return `<span class="badge badge-success">${row.category}</span>`;
         }
       },
       team: {
@@ -92,8 +96,7 @@ export class SmartTableComponent {
         title: 'Progress',
         type: 'html',
         valuePrepareFunction: (cell, row) => {
-          return `<div class="progress">
-        <div class="progress-bar" role="progressbar" width="30" aria-valuenow="32" aria-valuemin="0" aria-valuemax="32">${row.progress}</div></div>`
+          return `<div class="progress-bar" role="progressbar" width="30" aria-valuenow="32" aria-valuemin="0" aria-valuemax="32">${row.progress}</div>`
         }
       }
     },
@@ -102,10 +105,12 @@ export class SmartTableComponent {
   source: LocalDataSource = new LocalDataSource();
   btn_settings: Array<any>;
   public projects: Array<Project>; // Arreglo de asociados
+  public categories: Array<ProjectCategory>;
   public project_register: Project;
   public user: any;
 
   constructor(
+    private _projectCategoryService: ProjectCategoryService,
     private userService: UserService,
     private service: SmartTableService,
     private _projectService: ProjectService,
@@ -118,13 +123,26 @@ export class SmartTableComponent {
       this.themeName = theme.name;
       this.init(theme.variables);
     });
+
+    this.getCategoyData();
     this.getData();
 
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.jose);
+    
   }
 
 
+  getCategoyData() {
+    this._projectCategoryService.list().subscribe(
+      response => {
+        if(!response.projectcategories){ }else{
+          this.source.load(response.projectcategories);
+          let categories = response.projectcategories;
+          this.categories = categories;
+        }
+      },
+      error => { }	
+    );
+  }
   getData() {
     this._projectService.list().subscribe(
       response => {
@@ -144,6 +162,11 @@ export class SmartTableComponent {
         let project = response.project;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Project has been saved',
+          showConfirmButton: false,
+        })
         if (!project) { } else {
           this.project_register = project;
           this.project_register = new Project('', '', '', '', '');
@@ -151,8 +174,14 @@ export class SmartTableComponent {
       },
       error => { }
     );
-    console.log(this.project_register);
   }
+
+  changeCategory(category_name) {
+  this.categories.forEach(category => {
+    if (category.name == category_name)
+      this.project_register.category = category.name;
+  });
+} 
 
   init(colors: any) {
     this.btn_settings = [{
@@ -178,7 +207,29 @@ export class SmartTableComponent {
     console.log("edit");
   }
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    swal({
+      title: 'Delete the project?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your project has been deleted.',
+          'success'
+        )
+        this._projectService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }	
+        );
+      }
+    })
   }
 }

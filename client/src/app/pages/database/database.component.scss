@@ -1,0 +1,173 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+
+@include nb-install-component() {
+  .progress {
+    height: 25px;
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-more-tasks {
+    float: right;
+  }
+  ngx-chartjs-pie,
+  ngx-chartjs-bar,
+  ngx-chartjs-line,
+  ngx-chartjs-multiple-xaxis,
+  ngx-chartjs-bar-horizontal,
+  ngx-chartjs-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+
+    /deep/ chart {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  $padding: 1rem;
+
+  nb-card-body {
+    overflow: hidden;
+    padding: $padding;
+  }
+
+  .echart {
+    position: absolute;
+    height: calc(100% - 2 * #{$padding});
+    width: 40%;
+  }
+
+  .info {
+    margin-left: 45%;
+    padding-top: 1.5rem;
+    color: nb-theme(color-fg);
+  }
+
+  .value {
+    font-family: nb-theme(font-secondary);
+    font-size: 2rem;
+    font-weight: nb-theme(font-weight-bold);
+    color: nb-theme(color-fg-heading);
+  }
+
+  .details {
+    font-size: 1.25rem;
+    font-weight: nb-theme(font-weight-bolder);
+    line-height: 1;
+    span {
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+    }
+  }
+
+  .text-hint {
+    font-size: 1rem;
+  }
+
+  @include nb-for-theme(cosmic) {
+    color: nb-theme(color-fg-heading);
+
+    .value {
+      color: nb-theme(color-fg-highlight);
+    }
+
+    .details span {
+      color: nb-theme(color-fg);
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    .value {
+      font-size: 1.75rem;
+    }
+  }
+  nb-tabset {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nb-tab {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: nb-theme(color-fg);
+    padding: 1rem;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid nb-theme(separator);
+    }
+  }
+
+  .i-contact {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .time {
+    font-size: 0.875rem;
+    font-weight: nb-theme(font-weight-light);
+    text-transform: uppercase;
+  }
+
+  nb-user /deep/ {
+    .info-container {
+      margin-left: 0.875rem;
+    }
+
+    .user-name {
+      font-family: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(color-fg-heading);
+      font-size: 1.25rem;
+
+      @include nb-for-theme(cosmic) {
+        font-weight: nb-theme(font-weight-bolder);
+      }
+    }
+
+    .user-title {
+      font-size: 0.875rem;
+      font-weight: nb-theme(font-weight-light);
+      text-transform: uppercase;
+    }
+  }
+
+  nb-tabset {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nb-tab {
+    padding: nb-theme(padding);
+  }
+
+  /deep/ ngx-tab1, /deep/ ngx-tab2 {
+    display: block;
+    padding: nb-theme(padding);
+  }
+
+  @include media-breakpoint-down(xs) {
+    nb-tabset /deep/ul {
+      font-size: 1rem;
+      padding: 0 0.25rem;
+    }
+  }
+}

@@ -38,14 +38,13 @@ export class AllTasksComponent {
       },
       status: {
         title: 'Status',
-        type: 'string',
+        type: 'html',
+        valuePrepareFunction: (cell, row) => {
+          return `<span class="badge badge-success">${row.status}</span>`;
+        }
       },
       project_name: {
         title: 'Project Name',
-        type: 'string',
-      },
-      progres: {
-        title: 'Progress',
         type: 'string',
       },
       due_date: {
@@ -61,7 +60,7 @@ export class AllTasksComponent {
           if (month.length < 2) month = '0' + month;
           if (day.length < 2) day = '0' + day;
 
-          return [day, month, year].join('-') + " " + time;
+          return [day, month, year].join('-');
         }
       },
     },

@@ -21,16 +21,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },
-  /*{
-    title: 'Calendar',
-    icon: 'ion-ios-calendar-outline',
-    children: [
-      {
-        title: 'All Events',
-        link: '/pages/calendar/all-events',
-      },
-    ]
-  },*/
   {
     title: 'Tasks',
     icon: 'ion-ios-compose-outline',
@@ -114,7 +104,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Notes',
-    icon: 'ion-ios-photos-outline',
+    icon: 'ion-ios-paper-outline',
     children: [
       {
         title: 'My Notes',

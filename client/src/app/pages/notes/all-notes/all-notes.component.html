@@ -3,8 +3,6 @@
     <i class="ion-ios-compose-outline"></i> Notes
     <button class="btn btn-hero-success btn-add" data-toggle="modal" data-target="#exampleModal">New Note</button>
   </nb-card-header>
-  <toaster-container [toasterconfig]="config"></toaster-container>
-
   <nb-card-body>
     <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject($event)">
     </ng2-smart-table>

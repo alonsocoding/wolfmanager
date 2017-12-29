@@ -7,12 +7,10 @@ import { Note } from '../../../models/note';
 
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 
+import swal from 'sweetalert2';
 
 import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
-
-import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
   selector: 'image-view',
@@ -108,7 +106,6 @@ export class AllNotesComponent {
   public note_register: Note;
 
   constructor(
-    private toasterService: ToasterService,
     private service: SmartTableService,
     private _noteService: NoteService,
     private themeService: NbThemeService,
@@ -122,55 +119,6 @@ export class AllNotesComponent {
     });
     this.getData();
   }
-
-
-  config: ToasterConfig;
-
-  position = 'toast-top-right';
-  animationType = 'fade';
-  title = 'Note Saved';
-  content = `The note was saved successfully`;
-  timeout = 5000;
-  toastsLimit = 5;
-  type = 'success';
-
-  isNewestOnTop = true;
-  isHideOnClick = true;
-  isDuplicatesPrevented = false;
-  isCloseButton = true;
-
-  types: string[] = ['default', 'info', 'success', 'warning', 'error'];
-  animations: string[] = ['fade', 'flyLeft', 'flyRight', 'slideDown', 'slideUp'];
-  positions: string[] = ['toast-top-full-width', 'toast-bottom-full-width', 'toast-top-left', 'toast-top-center',
-    'toast-top-right', 'toast-bottom-right', 'toast-bottom-center', 'toast-bottom-left', 'toast-center'];
-
-
-  makeToast() {
-    this.showToast(this.type, this.title, this.content);
-  }
-
-  private showToast(type: string, title: string, body: string) {
-    this.config = new ToasterConfig({
-      positionClass: this.position,
-      timeout: this.timeout,
-      newestOnTop: this.isNewestOnTop,
-      tapToDismiss: this.isHideOnClick,
-      preventDuplicates: this.isDuplicatesPrevented,
-      animation: this.animationType,
-      limit: this.toastsLimit,
-    });
-
-    const toast: Toast = {
-      type: type,
-      title: title,
-      body: body,
-      timeout: this.timeout,
-      showCloseButton: this.isCloseButton,
-      bodyOutputType: BodyOutputType.TrustedHtml,
-    };
-    this.toasterService.popAsync(toast);
-  }
-
 
   getData() {
     this._noteService.list().subscribe(
@@ -191,6 +139,11 @@ export class AllNotesComponent {
         let note = response.note;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Note has been saved',
+          showConfirmButton: false,
+        })
         if (!note) { } else {
           this.note_register = note;
           this.note_register = new Note('', '', '');
@@ -198,9 +151,6 @@ export class AllNotesComponent {
       },
       error => { }
     );
-    this.title = 'Note Saved';
-        this.content = 'The note was saved successfully';
-    this.makeToast();
   }
 
   init(colors: any) {
@@ -228,15 +178,29 @@ export class AllNotesComponent {
   }
 
   deleteProject(event): void {
-    this._noteService.delete(event.data.id).subscribe(
-			response => {
-        this.getData();
-        this.title = 'Note Deleted';
-        this.content = 'The note was deleted successfully';
-        this.makeToast();
-			},
-			error => { }	
-		);
+    swal({
+      title: 'Delete the note?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your note has been deleted.',
+          'success'
+        )
+        this._noteService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }
+        );
+      }
+    })
   }
 
 
