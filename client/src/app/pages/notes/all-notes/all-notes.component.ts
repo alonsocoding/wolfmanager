@@ -6,6 +6,39 @@ import { NoteService } from '../../../services/note.service';
 import { Note } from '../../../models/note';
 
 import { SmartTableService } from '../../../@core/data/smart-table.service';
+
+
+import { OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ViewCell } from 'ng2-smart-table';
+
+import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
+import 'style-loader!angular2-toaster/toaster.css';
+
+@Component({
+  selector: 'image-view',
+  styleUrls: ['./all-notes.component.scss'],
+  template: `
+  <img class="img-circle" src="../../../../assets/images/jose.png"/>
+  `,
+})
+export class ImageViewComponent implements ViewCell, OnInit {
+  renderValue: string;
+
+  @Input() value: string | number;
+  @Input() rowData: any;
+
+  @Output() save: EventEmitter<any> = new EventEmitter();
+
+  ngOnInit() {
+    this.renderValue = this.value.toString().toUpperCase();
+  }
+
+  onClick() {
+    this.save.emit(this.rowData);
+  }
+}
+
+
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './all-notes.component.html',
@@ -32,6 +65,11 @@ export class AllNotesComponent {
       confirmDelete: true,
     },
     columns: {
+      user: {
+        title: 'User',
+        type: 'custom',
+        renderComponent: ImageViewComponent
+      },
       name: {
         title: 'Title',
         type: 'string',
@@ -47,6 +85,19 @@ export class AllNotesComponent {
       updatedAt: {
         title: 'Last Updated',
         type: 'string',
+
+        valuePrepareFunction: (cell, row) => {
+          var d = new Date(row.updatedAt),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear(),
+            time = d.getHours() + ':' + d.getMinutes();
+
+          if (month.length < 2) month = '0' + month;
+          if (day.length < 2) day = '0' + day;
+
+          return [day, month, year].join('-');
+        }
       }
     },
   };
@@ -57,6 +108,7 @@ export class AllNotesComponent {
   public note_register: Note;
 
   constructor(
+    private toasterService: ToasterService,
     private service: SmartTableService,
     private _noteService: NoteService,
     private themeService: NbThemeService,
@@ -69,6 +121,54 @@ export class AllNotesComponent {
       this.init(theme.variables);
     });
     this.getData();
+  }
+
+
+  config: ToasterConfig;
+
+  position = 'toast-top-right';
+  animationType = 'fade';
+  title = 'Note Saved';
+  content = `The note was saved successfully`;
+  timeout = 5000;
+  toastsLimit = 5;
+  type = 'success';
+
+  isNewestOnTop = true;
+  isHideOnClick = true;
+  isDuplicatesPrevented = false;
+  isCloseButton = true;
+
+  types: string[] = ['default', 'info', 'success', 'warning', 'error'];
+  animations: string[] = ['fade', 'flyLeft', 'flyRight', 'slideDown', 'slideUp'];
+  positions: string[] = ['toast-top-full-width', 'toast-bottom-full-width', 'toast-top-left', 'toast-top-center',
+    'toast-top-right', 'toast-bottom-right', 'toast-bottom-center', 'toast-bottom-left', 'toast-center'];
+
+
+  makeToast() {
+    this.showToast(this.type, this.title, this.content);
+  }
+
+  private showToast(type: string, title: string, body: string) {
+    this.config = new ToasterConfig({
+      positionClass: this.position,
+      timeout: this.timeout,
+      newestOnTop: this.isNewestOnTop,
+      tapToDismiss: this.isHideOnClick,
+      preventDuplicates: this.isDuplicatesPrevented,
+      animation: this.animationType,
+      limit: this.toastsLimit,
+    });
+
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: this.timeout,
+      showCloseButton: this.isCloseButton,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+    this.toasterService.popAsync(toast);
   }
 
 
@@ -98,7 +198,9 @@ export class AllNotesComponent {
       },
       error => { }
     );
-    console.log(this.note_register);
+    this.title = 'Note Saved';
+        this.content = 'The note was saved successfully';
+    this.makeToast();
   }
 
   init(colors: any) {
@@ -125,7 +227,17 @@ export class AllNotesComponent {
     console.log("edit");
   }
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    this._noteService.delete(event.data.id).subscribe(
+			response => {
+        this.getData();
+        this.title = 'Note Deleted';
+        this.content = 'The note was deleted successfully';
+        this.makeToast();
+			},
+			error => { }	
+		);
   }
+
+
 }

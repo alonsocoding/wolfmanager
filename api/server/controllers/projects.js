@@ -64,4 +64,20 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+  destroyAll(req, res) {
+    return Project
+      .all()
+      .then(project => {
+        if (!project) {
+          return res.status(400).send({
+            message: 'Project Not Found',
+          });
+        }
+        return project
+          .destroy()
+          .then(() => res.status(204).send())
+          .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
+  },
 };

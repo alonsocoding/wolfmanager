@@ -6,13 +6,13 @@
   </div>
 
   <div class="col-xxxl-3 col-md-6 col-lg-3">
-    <ngx-status-card title="38" number="Tasks" type="success">
+    <ngx-status-card title="25" number="Tasks" type="success">
       <i class="ion-ios-compose-outline"></i>
     </ngx-status-card>
   </div>
 
   <div class="col-xxxl-3 col-md-6 col-lg-3">
-    <ngx-status-card title="3" number="Teams" type="warning">
+    <ngx-status-card title="12" number="Members" type="warning">
       <i class="ion-ios-people-outline"></i>
     </ngx-status-card>
   </div>
@@ -64,9 +64,12 @@
 <div class="row">
   <div class="col-xxs12 col-md-12 col-lg-4">
     <nb-card class="solar-card">
-      <nb-card-header>Recent Activity</nb-card-header>
+      <nb-card-header>Team Members</nb-card-header>
       <nb-card-body>
-
+          <div class="contact" *ngFor="let c of contacts">
+              <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
+              <i class="i-contact nb-email"></i>
+            </div>
       </nb-card-body>
     </nb-card>
   </div>

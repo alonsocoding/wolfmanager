@@ -48,11 +48,11 @@
 
   nb-sidebar.menu-sidebar {
 
-    margin-top: nb-theme(sidebar-header-gap);
+    //margin-top: nb-theme(sidebar-header-gap);
 
     /deep/ .main-container {
       height:
-        calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
+        10+calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
       border-top-right-radius: nb-theme(radius);
     }
 

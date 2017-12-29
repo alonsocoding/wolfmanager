@@ -46,7 +46,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
-    title: 'File Manager',
+    title: 'Files',
     icon: 'ion-ios-copy-outline',
     children: [
       {

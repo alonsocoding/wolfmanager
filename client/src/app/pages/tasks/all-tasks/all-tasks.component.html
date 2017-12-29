@@ -35,7 +35,8 @@
                 <div class="form-group row">
                 <label for="inputDescription" class="col-sm-3 col-form-label">Task Description</label>
                 <div class="col-sm-9">
-                  <ngx-tiny-mce></ngx-tiny-mce>
+                  <!--<ngx-tiny-mce></ngx-tiny-mce>-->
+                  <textarea name="description" [(ngModel)]="task_register.description" type="name" class="form-control" id="inputDescription" placeholder="Enter the description of the task"></textarea>
                 </div>
                 </div>
                 <div class="form-group row">

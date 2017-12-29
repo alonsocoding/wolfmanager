@@ -56,6 +56,19 @@ export class DashboardComponent {
   themeSubscription: any;
   btn_settings: Array<any>;
 
+  contacts: any[];
+  recent: any[];
+
+  private users = {
+    jose: { name: 'Jose Delgado', picture: 'assets/images/jose.png'},
+    nick: { name: 'Nick Jones', picture: 'assets/images/nick.png' },
+    eva: { name: 'Eva Moor', picture: 'assets/images/eva.png' },
+    jack: { name: 'Jack Williams', picture: 'assets/images/jack.png' },
+    lee: { name: 'Lee Wong', picture: 'assets/images/lee.png' },
+    alan: { name: 'Alan Thompson', picture: 'assets/images/alan.png' },
+    kate: { name: 'Kate Martinez', picture: 'assets/images/kate.png' },
+  };
+
   constructor(
     private _projectService: ProjectService,
     private themeService: NbThemeService,
@@ -67,7 +80,13 @@ export class DashboardComponent {
       this.init(theme.variables);
     });
     this.getData();
-
+    this.contacts = [
+          {user: this.users.jose, type: 'mobile'},
+          {user: this.users.eva, type: 'home'},
+          {user: this.users.jack, type: 'mobile'},
+          {user: this.users.lee, type: 'mobile'},
+          {user: this.users.alan, type: 'home'},
+        ];
   }
 
   getData() {

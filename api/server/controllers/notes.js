@@ -45,4 +45,7 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
+    destroyAll(req, res) {
+        return Note.destroy({where: {}}).then(function () {});
+    },
 };

@@ -36,6 +36,17 @@ export class ProjectService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.get(this.url+'project/list', options)
 						 .map(res => res.json());
+    }
+    
+    // Delete a single Project
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'project/delete/'+id, options)
+						 .map(res => res.json());
 	}
 
 }

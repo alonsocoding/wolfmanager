@@ -35,20 +35,14 @@
                 <div class="form-group row">
                   <label for="inputFile" class="col-sm-3 col-form-label">File</label>
                   <div class="col-sm-9">
-                    <div class="input-group">
-                      <input name="icon" [(ngModel)]="file_register.file" type="text" class="form-control" placeholder="Select a file">
-                      <span class="input-group-btn">
-                        <button class="btn btn-info">
-                          Select File
-                        </button>
-                      </span>
-                    </div>
+                      <input name="file" id="file" [(ngModel)]="file_register.file" type="file" class="form-control" placeholder="Select a file">
                   </div>
                 </div>
                 <div class="form-group row">
                 <label for="inputNotes" class="col-sm-3 col-form-label">Notes</label>
                 <div class="col-sm-9">
-                  <ngx-tiny-mce></ngx-tiny-mce>
+                  <!--<ngx-tiny-mce></ngx-tiny-mce>-->
+                  <textarea name="notes" [(ngModel)]="file_register.notes" type="text" class="form-control" placeholder="Enter a note for the file"></textarea>
                 </div>
                 </div>
                 <div class="form-group row">

@@ -28,11 +28,11 @@ import 'rxjs/add/operator/delay';
                    tag="menu-sidebar"
                    responsive
                    [right]="sidebar.id === 'right'">
-        <nb-sidebar-header>
+        <!--<nb-sidebar-header>
           <a href="#" class="btn btn-hero-info main-btn">
             <i class="ion ion-ios-cloud"></i> <span>Cloud</span>
           </a>
-        </nb-sidebar-header>
+        </nb-sidebar-header>-->
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 

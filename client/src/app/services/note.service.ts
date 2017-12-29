@@ -36,6 +36,17 @@ export class NoteService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.get(this.url+'note/list', options)
 						 .map(res => res.json());
+    }
+    
+    // Delete a single Note
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'note/delete/'+id, options)
+						 .map(res => res.json());
 	}
 
 }

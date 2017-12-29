@@ -3,9 +3,10 @@
     <i class="ion-ios-compose-outline"></i> Notes
     <button class="btn btn-hero-success btn-add" data-toggle="modal" data-target="#exampleModal">New Note</button>
   </nb-card-header>
+  <toaster-container [toasterconfig]="config"></toaster-container>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject()">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
@@ -26,13 +27,14 @@
           <div class="form-group row">
             <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
             <div class="col-sm-9">
-              <input name="title" [(ngModel)]="note_register.name" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter the name of the entry">
+              <input name="title" [(ngModel)]="note_register.name" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter the name of the note">
             </div>
           </div>
           <div class="form-group row">
             <label for="inputNotes" class="col-sm-3 col-form-label">Note</label>
             <div class="col-sm-9">
-              <ngx-tiny-mce></ngx-tiny-mce>
+              <!--<ngx-tiny-mce></ngx-tiny-mce>-->
+              <textarea name="note" [(ngModel)]="note_register.note" type="text" class="form-control" id="inputFinanceCategory" placeholder="Enter the note" rows="5"></textarea>
             </div>
           </div>
           <div class="form-group row">
@@ -49,7 +51,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" (click)="insert()">Save Note</button>
+        <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Note</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

@@ -4,6 +4,9 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { NotesRoutingModule, routedComponents } from './notes-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToasterModule } from 'angular2-toaster';
+
+import { ImageViewComponent } from './all-notes/all-notes.component';
 
 const components = [
 ];
@@ -13,11 +16,16 @@ const components = [
     ThemeModule,
     NotesRoutingModule,
     Ng2SmartTableModule,
-    FormsModule
+    FormsModule,
+    ToasterModule,
   ],
   declarations: [
     ...routedComponents,
-    ...components
+    ...components,
+    ImageViewComponent
+  ],
+  entryComponents: [
+    ImageViewComponent
   ],
   providers: [
     SmartTableService,
