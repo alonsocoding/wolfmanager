@@ -6,7 +6,8 @@ module.exports = {
             .create({
                 name: req.body.name,
                 note: req.body.note,
-                project: req.body.project })
+                project: req.body.project
+            })
             .then((note) => res.status(201).send(note))
             .catch((error) => res.status(400).send(error));
     },
@@ -29,6 +30,16 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
+    update(req, res) {
+        return Note
+            .update({ 
+                name: req.body.name,
+                note: req.body.note,
+                project: req.body.project },{
+                where: { id: req.params.noteId }})
+            .then((note) => res.status(201).send(note))
+            .catch((error) => res.status(400).send(error));
+    },
     destroy(req, res) {
         return Note
             .findById(req.params.noteId)
@@ -46,6 +57,6 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
     destroyAll(req, res) {
-        return Note.destroy({where: {}}).then(function () {});
+        return Note.destroy({ where: {} }).then(function () { });
     },
 };

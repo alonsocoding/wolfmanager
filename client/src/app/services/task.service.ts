@@ -38,4 +38,15 @@ export class TaskService {
 						 .map(res => res.json());
 	}
 
+
+    // Delete a single Task
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'task/delete/'+id, options)
+						 .map(res => res.json());
+	}
 }

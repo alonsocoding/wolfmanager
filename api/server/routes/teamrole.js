@@ -9,4 +9,8 @@ api.get('/teamrole/list', teamController.list);
 // Create a new team role
 api.post('/teamrole/insert', teamController.create);
 
+// Delete a teamrole with id
+api.delete('/teamrole/delete/:teamroleId', teamController.destroy);
+
+
 module.exports = api;

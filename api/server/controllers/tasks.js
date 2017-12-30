@@ -24,8 +24,7 @@ module.exports = {
     return Task
       .find({
         where: {
-          id: req.params.taskId,
-          projectId: req.params.projectId,
+          id: req.params.taskId
         },
       })
       .then(task => {
@@ -41,5 +40,8 @@ module.exports = {
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
+  },
+  destroyAll(req, res) {
+    return Task.destroy({where: {}}).then(function () {});
   },
 };

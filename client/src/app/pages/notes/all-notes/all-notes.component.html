@@ -4,7 +4,7 @@
     <button class="btn btn-hero-success btn-add" data-toggle="modal" data-target="#exampleModal">New Note</button>
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject($event)">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="open($event)" (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
@@ -38,11 +38,9 @@
           <div class="form-group row">
             <label for="inputProgress" class="col-sm-3 col-form-label">Project</label>
             <div class="col-sm-9">
-              <select class="form-control" name="category" [(ngModel)]="note_register.project">
-                <option>Sudoku</option>
-                <option>Chess</option>
-                <option>Program</option>
-              </select>
+                <select (change)="changeProject(project)" #selectTipo="ngModel" name="project" [(ngModel)]="project" class="form-control">
+                    <option *ngFor="let project of projects" value="{{project.name}}">{{project.name}}</option>
+                </select>
             </div>
           </div>
 

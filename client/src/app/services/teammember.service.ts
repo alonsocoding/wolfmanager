@@ -36,6 +36,17 @@ export class TeamMemberService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.get(this.url+'teammember/list', options)
 						 .map(res => res.json());
-	}
+    }
+    
+    // Delete a single team member
+    delete(id: string) {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+
+        let options = new RequestOptions({ headers: headers });
+        return this._http.delete(this.url + 'teammember/delete/' + id, options)
+            .map(res => res.json());
+    }
 
 }

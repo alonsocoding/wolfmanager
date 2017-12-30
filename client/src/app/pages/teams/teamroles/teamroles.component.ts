@@ -4,7 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TeamRoleService } from '../../../services/teamrole.service';
 import { TeamRole } from '../../../models/TeamRole';
-
+import swal from 'sweetalert2';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 @Component({
   selector: 'ngx-smart-table',
@@ -83,6 +83,11 @@ export class TeamRolesComponent {
         let teamrole = response.teamrole;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Team Role has been saved',
+          showConfirmButton: false,
+        })
         if (!teamrole) { } else {
           this.teamrole_register = teamrole;
           this.teamrole_register = new TeamRole('', false, false, false, false, false, false, false, false, false, false, false);
@@ -117,7 +122,29 @@ export class TeamRolesComponent {
     console.log("edit");
   }
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    swal({
+      title: 'Delete the project?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your project has been deleted.',
+          'success'
+        )
+        this._teamroleService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }	
+        );
+      }
+    })
   }
 }

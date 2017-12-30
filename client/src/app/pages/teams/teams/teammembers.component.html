@@ -8,7 +8,7 @@
     <ng2-smart-table [settings]="settings" 
     [source]="source" 
     (edit)="editProject()"
-    (delete)="deleteProject()">
+    (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
@@ -49,9 +49,10 @@
               </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" (click)="insert()">Save Team Member</button>
+          <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Team Member</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
+

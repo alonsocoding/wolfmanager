@@ -4,7 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TeamMemberService } from '../../../services/teammember.service';
 import { TeamMember } from '../../../models/TeamMember';
-
+import swal from 'sweetalert2';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 @Component({
   selector: 'ngx-smart-table',
@@ -42,10 +42,6 @@ export class TeamMembersComponent {
       },
       project_name: {
         title: 'Project Name',
-        type: 'string',
-      },
-      last_online: {
-        title: 'Last Online',
         type: 'string',
       }
     },
@@ -91,6 +87,11 @@ export class TeamMembersComponent {
         let teammember = response.teammember;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Team Member has been saved',
+          showConfirmButton: false,
+        })
         if (!teammember) { } else {
           this.teammember_register = teammember;
           this.teammember_register = new TeamMember('', '', '');
@@ -125,7 +126,29 @@ export class TeamMembersComponent {
     console.log("edit");
   }
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    swal({
+      title: 'Delete the project?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your project has been deleted.',
+          'success'
+        )
+        this._teammemberService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }	
+        );
+      }
+    })
   }
 }

@@ -4,7 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
-
+import swal from 'sweetalert2';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 @Component({
   selector: 'ngx-smart-table',
@@ -111,6 +111,11 @@ export class MembersComponent {
         let user = response.user;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Member has been saved',
+          showConfirmButton: false,
+        })
         if (!user) { } else {
           this.user_register = user;
           this.user_register = new User('', '','','','','');
@@ -145,7 +150,29 @@ export class MembersComponent {
     console.log("edit");
   }
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    swal({
+      title: 'Delete the project?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your project has been deleted.',
+          'success'
+        )
+        this._userService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }	
+        );
+      }
+    })
   }
 }

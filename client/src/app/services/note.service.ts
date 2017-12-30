@@ -47,6 +47,16 @@ export class NoteService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.delete(this.url+'note/delete/'+id, options)
 						 .map(res => res.json());
+    }
+    
+    // Update a single Note
+    update(note_to_update, id){
+		let params = JSON.stringify(note_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'note/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
 	}
 
 }

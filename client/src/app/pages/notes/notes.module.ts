@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToasterModule } from 'angular2-toaster';
 
 import { ImageViewComponent } from './all-notes/all-notes.component';
+import { NgbdModalContent } from './all-notes/all-notes.component';
 
 const components = [
 ];
@@ -22,10 +23,12 @@ const components = [
   declarations: [
     ...routedComponents,
     ...components,
-    ImageViewComponent
+    ImageViewComponent,
+    NgbdModalContent
   ],
   entryComponents: [
-    ImageViewComponent
+    ImageViewComponent,
+    NgbdModalContent
   ],
   providers: [
     SmartTableService,

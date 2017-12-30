@@ -35,7 +35,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },
-  {
+  /*{
     title: 'Files',
     icon: 'ion-ios-copy-outline',
     children: [
@@ -48,7 +48,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/files/all-files',
       },
     ]
-  },
+  },*/
   {
     title: 'Team',
     icon: 'ion-ios-people-outline',
@@ -85,6 +85,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },*/
+  {
+    title: 'Chat',
+    icon: 'ion-ios-chatboxes-outline',
+    link: '/pages/finances/my-finances',
+  },
   {
     title: 'Finance',
     icon: 'ion-ios-calculator-outline',

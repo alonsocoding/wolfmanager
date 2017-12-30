@@ -38,4 +38,14 @@ export class UserService {
 						 .map(res => res.json());
 	}
 
+    // Delete a single user
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'user/delete/'+id, options)
+						 .map(res => res.json());
+	}
 }

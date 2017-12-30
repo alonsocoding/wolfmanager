@@ -5,6 +5,8 @@ import { TasksRoutingModule, routedComponents } from './tasks-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgbdModalContent } from './all-tasks/all-tasks.component';
+
 const components = [
 ];
 
@@ -17,7 +19,11 @@ const components = [
   ],
   declarations: [
     ...routedComponents,
-    ...components
+    ...components,
+    NgbdModalContent
+  ],
+  entryComponents: [
+    NgbdModalContent
   ],
   providers: [
     SmartTableService,

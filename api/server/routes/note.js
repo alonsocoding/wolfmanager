@@ -3,9 +3,11 @@ const noteController = require('../controllers').notes;
 var express = require('express');
 var api = express.Router();
 
-// Listing the files
+// Listing the notes
 api.get('/note/list', noteController.list);
-api.get('/note/update/:noteId', noteController.retrieve);
+
+// Update the note
+api.put('/note/update/:noteId', noteController.update);
 
 // Create a new note
 api.post('/note/insert', noteController.create);

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../models/Project';
 
@@ -16,6 +16,65 @@ import swal from 'sweetalert2';
 
 import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
+
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header modal-lg">
+      <h4 class="modal-title">Project Information</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    <form>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label">Project Name</label>
+      <div class="col-sm-9">
+        <input name="name" [(ngModel)]="project_show.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the project">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputIcon" class="col-sm-3 col-form-label">Project Icon</label>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <input type="file" class="form-control" placeholder="Select a file">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+    <label for="inputDescription" class="col-sm-3 col-form-label">Description</label>
+    <div class="col-sm-9">
+        <textarea rows="5" name="description" [(ngModel)]="project_show.description" type="progress" class="form-control" id="inputProgress" placeholder="Enter the description of the project"></textarea>
+      <!--<ngx-tiny-mce></ngx-tiny-mce>-->
+    </div>
+    </div>
+    <div class="form-group row">
+    <label for="inputProgress" class="col-sm-3 col-form-label">Progress</label>
+    <div class="col-sm-9">
+      <input name="progress" [(ngModel)]="project_show.progress" type="progress" class="form-control" id="inputProgress" placeholder="Enter progress with % at the end">
+    </div>
+    </div>
+  </form><hr>
+
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="activeModal.close('Close click')">Update</button>
+      <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+
+  @Input() project_show;
+  @Input() id;
+
+  constructor(public activeModal: NgbActiveModal) {
+  }
+}
+
 
 @Component({
   selector: 'image-view',
@@ -130,12 +189,22 @@ export class SmartTableComponent {
     
   }
 
+  open(event) {
+    var id = event.data.id;
+    var project_show = new Project(event.data.name,event.data.icon,event.data.description,event.data.progress,event.data.category);
+    const modalRef = this.modalService.open(NgbdModalContent, {
+      size: 'lg',
+    });
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.project_show = project_show;
+  }
+
+
 
   getCategoyData() {
     this._projectCategoryService.list().subscribe(
       response => {
         if(!response.projectcategories){ }else{
-          this.source.load(response.projectcategories);
           let categories = response.projectcategories;
           this.categories = categories;
         }
@@ -143,6 +212,7 @@ export class SmartTableComponent {
       error => { }	
     );
   }
+  
   getData() {
     this._projectService.list().subscribe(
       response => {
@@ -213,8 +283,8 @@ export class SmartTableComponent {
       text: "You won't be able to revert this",
       type: 'info',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#4ca6ff',
+      cancelButtonColor: '#ff4c6a',
       confirmButtonText: 'Yes, delete it'
     }).then((result) => {
       if (result.value) {

@@ -9,4 +9,11 @@ api.get('/task/list', taskController.list);
 // Create a new task
 api.post('/task/insert', taskController.create);
 
+
+// Delete a task with id
+api.delete('/task/delete/:taskId', taskController.destroy);
+
+// Delete every task
+api.delete('/task/delete/task-all', taskController.destroyAll);
+
 module.exports = api;
