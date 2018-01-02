@@ -36,6 +36,37 @@ export class EntryService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.get(this.url+'entry/list', options)
 						 .map(res => res.json());
+    }
+    
+    // Delete a single Entry
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'entry/delete/'+id, options)
+						 .map(res => res.json());
+    }
+
+    count(){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.get(this.url+'entry/count', options)
+						 .map(res => res.json());
+    }
+    
+    // Update a single Entry
+    update(entry_to_update, id){
+		let params = JSON.stringify(entry_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'entry/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
 	}
 
 }

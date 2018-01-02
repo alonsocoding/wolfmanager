@@ -5,6 +5,10 @@ import { FinancesRoutingModule, routedComponents } from './finances-routing.modu
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgbdModalContent } from './categories/categories.component';
+import { NgbdModalContent2 } from './all-finances/all-finances.component';
+import { NgbdModalContent3 } from './my-finances/my-finances.component';
+
 const components = [
 ];
 
@@ -17,7 +21,15 @@ const components = [
   ],
   declarations: [
     ...routedComponents,
-    ...components
+    ...components,
+    NgbdModalContent,
+    NgbdModalContent2,
+    NgbdModalContent3
+  ],
+  entryComponents: [
+    NgbdModalContent,
+    NgbdModalContent2,
+    NgbdModalContent3
   ],
   providers: [
     SmartTableService,

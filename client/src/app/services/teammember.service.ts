@@ -49,4 +49,14 @@ export class TeamMemberService {
             .map(res => res.json());
     }
 
+    // Update a single Team Member
+    update(teammember_to_update, id){
+		let params = JSON.stringify(teammember_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'teammember/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
+	}
+
 }

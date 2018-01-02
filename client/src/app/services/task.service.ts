@@ -48,5 +48,26 @@ export class TaskService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.delete(this.url+'task/delete/'+id, options)
 						 .map(res => res.json());
+    }
+
+    // Count all the Projects
+    count(){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.get(this.url+'task/count', options)
+						 .map(res => res.json());
+    }
+    
+    // Update a single Task
+    update(task_to_update, id){
+		let params = JSON.stringify(task_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'task/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
 	}
 }

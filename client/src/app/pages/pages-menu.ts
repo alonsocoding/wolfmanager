@@ -85,11 +85,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },*/
-  {
-    title: 'Chat',
-    icon: 'ion-ios-chatboxes-outline',
-    link: '/pages/finances/my-finances',
-  },
+  //{
+  //  title: 'Chat',
+  //  icon: 'ion-ios-chatboxes-outline',
+  //  link: '/pages/finances/my-finances',
+  //},
   {
     title: 'Finance',
     icon: 'ion-ios-calculator-outline',

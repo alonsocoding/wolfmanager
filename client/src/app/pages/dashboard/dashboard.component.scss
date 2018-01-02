@@ -7,7 +7,7 @@
   .progress {
     height: 25px;
   }
-  .btn-more-tasks {
+  .btn-more {
     float: right;
   }
   ngx-chartjs-pie,
@@ -95,6 +95,10 @@
     overflow-y: auto;
     padding: 0;
   }
+  .rightColumn {
+    align-self: right;
+    float: right;
+  }
 
   .contact {
     display: flex;
@@ -111,6 +115,10 @@
   .i-contact {
     font-size: 2rem;
     cursor: pointer;
+  }
+
+  ul {
+    list-style-type: none;
   }
 
   .time {

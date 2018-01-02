@@ -4,7 +4,7 @@ module.exports = {
     create(req, res) {
         return Entry
             .create({
-                title: req.body.tile,
+                title: req.body.title,
                 note: req.body.note,
                 category: req.body.category,
                 project_name: req.body.project_name,
@@ -19,7 +19,7 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
     retrieve(req, res) {
-        return File
+        return Entry
             .findById(req.params.entryId)
             .then((entry) => {
                 if (!entry) {
@@ -31,8 +31,26 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
+    update(req, res) {
+        return Entry
+            .update({ 
+                title: req.body.title,
+                note: req.body.note,
+                category: req.body.category,
+                project_name: req.body.project_name,
+                amount: req.body.amount },{
+                where: { id: req.params.entryId }})
+            .then((entry) => res.status(201).send(entry))
+            .catch((error) => res.status(400).send(error));
+    },
+    countAll(req, res) {
+        return Entry
+        .findAndCountAll()
+        .then((result) => res.status(201).send(result))
+        .catch((error) => res.status(400).send(error));
+    },
     destroy(req, res) {
-        return File
+        return Entry
             .findById(req.params.entryId)
             .then(entry => {
                 if (!entry) {

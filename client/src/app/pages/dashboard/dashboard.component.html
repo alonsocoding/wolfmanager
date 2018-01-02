@@ -1,25 +1,25 @@
 <div class="row">
   <div class="col-xxxl-3 col-md-6 col-lg-3">
-    <ngx-status-card title="10" number="Projects" type="info">
+    <ngx-status-card title="{{countProject}}" number="Projects" type="info">
       <i class="ion-ios-folder-outline"></i>
     </ngx-status-card>
   </div>
 
   <div class="col-xxxl-3 col-md-6 col-lg-3">
-    <ngx-status-card title="25" number="Tasks" type="success">
+    <ngx-status-card title="{{countTask}}" number="Tasks" type="success">
       <i class="ion-ios-compose-outline"></i>
     </ngx-status-card>
   </div>
 
   <div class="col-xxxl-3 col-md-6 col-lg-3">
-    <ngx-status-card title="12" number="Members" type="warning">
+    <ngx-status-card title="{{countMember}}" number="Members" type="warning">
       <i class="ion-ios-people-outline"></i>
     </ngx-status-card>
   </div>
 
   <div class="col-xxxl-3 col-md-6 col-lg-3">
-    <ngx-status-card title="15" number="Events" type="danger">
-      <i class="ion-ios-calendar-outline"></i>
+    <ngx-status-card title="{{countEntry}}" number="Entries" type="danger">
+      <i class="ion-ios-calculator-outline"></i>
     </ngx-status-card>
   </div>
 </div>
@@ -35,25 +35,18 @@
   </div>
   <div class="col-xxs12 col-md-12 col-lg-4">
     <nb-card class="solar-card">
-      <nb-card-header>Current Tasks</nb-card-header>
+      <nb-card-header>Current Projects</nb-card-header>
       <nb-card-body>
-          <label>Business Plan</label>
-          <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div> <hr>
-            <label>CEO Review</label>
-          <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 72%;" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">72%</div>
-            </div> <hr>
-            <label>Design Logo</label>
-          <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">55%</div>
-            </div> <hr>
-            <label>Finish Program</label>
-          <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 32%;" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100">32%</div>
-            </div> <hr>
-            <button class="btn btn-sm btn-success btn-more-tasks">More Tasks</button>
+        <ul>
+          <li *ngFor="let project of projects; let i = index">
+            <label>{{project.name}}</label>
+            <ngb-progressbar showValue="true" type="success" [value]="value[0]" max="100"></ngb-progressbar>
+            <hr>
+          </li>
+        </ul>
+        <hr>
+
+        <a href="#/pages/projects/smart-table"><button class="btn btn-sm btn-success btn-more">More Projects</button></a>
       </nb-card-body>
     </nb-card>
   </div>
@@ -66,23 +59,45 @@
     <nb-card class="solar-card">
       <nb-card-header>Team Members</nb-card-header>
       <nb-card-body>
-          <div class="contact" *ngFor="let c of contacts">
-              <nb-user [picture]="c.user.picture" [name]="c.user.name" [title]="c.type" size="large"></nb-user>
-              <i class="i-contact nb-email"></i>
-            </div>
+        <div class="contact" *ngFor="let user of users">
+          <nb-user [name]="user.first_name" [title]="user.username" size="large"></nb-user>
+          <i class="i-contact nb-email"></i>
+        </div>
+        <hr>
+        <a href="#/pages/teams/members"><button class="btn btn-sm btn-success btn-more">More Members</button></a>
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-xxs12 col-md-12 col-lg-8">
+  <div class="col-xxs12 col-md-12 col-lg-4">
     <nb-card class="solar-card">
-      <nb-card-header>Projects</nb-card-header>
+      <nb-card-header>Current Tasks</nb-card-header>
       <nb-card-body>
-          <ng2-smart-table [settings]="settings" 
-          [source]="source" 
-          (edit)="editProject()"
-          (delete)="deleteProject()">
-          </ng2-smart-table>
+        <ul>
+          <li *ngFor="let task of tasks; let i = index">
+            <label>{{task.name}} </label>
+            <span class="badge badge-success rightColumn">{{task.status}}</span>
+            <hr>
+          </li>
+        </ul>
+        <hr>
+        <a href="#/pages/tasks/all-tasks"><button class="btn btn-sm btn-success btn-more">More Tasks</button></a>
       </nb-card-body>
     </nb-card>
   </div>
+  <div class="col-xxs12 col-md-12 col-lg-4">
+      <nb-card class="solar-card">
+        <nb-card-header>Current Entries</nb-card-header>
+        <nb-card-body>
+          <ul>
+            <li *ngFor="let entry of entries; let i = index">
+              <label>{{entry.title}} </label>
+              <label class="rightColumn">{{entry.amount}}</label>
+              <hr>
+            </li>
+          </ul>
+          <hr>
+          <a href="#/pages/finances/all-finances"><button class="btn btn-sm btn-success btn-more">More Entries</button></a>
+        </nb-card-body>
+      </nb-card>
+    </div>
 </div>

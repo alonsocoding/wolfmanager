@@ -11,6 +11,7 @@ const components = [
 import { ButtonViewComponent } from './categories/categories.component';
 import { ImageViewComponent } from './smart-table/smart-table.component';
 import { NgbdModalContent } from './smart-table/smart-table.component';
+import { NgbdModalContent2 } from './categories/categories.component';
 
 
 @NgModule({
@@ -25,12 +26,14 @@ import { NgbdModalContent } from './smart-table/smart-table.component';
     ...components,
     ButtonViewComponent,
     ImageViewComponent,
-    NgbdModalContent
+    NgbdModalContent,
+    NgbdModalContent2
   ],
   entryComponents: [
     ButtonViewComponent,
     ImageViewComponent,
-    NgbdModalContent
+    NgbdModalContent,
+    NgbdModalContent2
   ],
   providers: [
     SmartTableService,

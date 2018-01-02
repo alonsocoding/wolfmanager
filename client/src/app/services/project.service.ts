@@ -37,6 +37,17 @@ export class ProjectService {
 		return this._http.get(this.url+'project/list', options)
 						 .map(res => res.json());
     }
+
+    // Count all the Projects
+    count(){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.get(this.url+'project/count', options)
+						 .map(res => res.json());
+    }
     
     // Delete a single Project
     delete(id: string){
@@ -49,4 +60,13 @@ export class ProjectService {
 						 .map(res => res.json());
 	}
 
+    // Update a single Project
+    update(project_to_update, id){
+		let params = JSON.stringify(project_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'project/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
+	}
 }

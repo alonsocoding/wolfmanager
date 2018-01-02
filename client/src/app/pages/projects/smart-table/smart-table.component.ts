@@ -20,6 +20,7 @@ import { ViewCell } from 'ng2-smart-table';
 
 @Component({
   selector: 'ngbd-modal-content',
+  providers: [ProjectService, ProjectCategoryService],
   template: `
     <div class="modal-header modal-lg">
       <h4 class="modal-title">Project Information</h4>
@@ -57,11 +58,19 @@ import { ViewCell } from 'ng2-smart-table';
       <input name="progress" [(ngModel)]="project_show.progress" type="progress" class="form-control" id="inputProgress" placeholder="Enter progress with % at the end">
     </div>
     </div>
+    <div class="form-group row">
+                  <label for="inputProgress" class="col-sm-3 col-form-label">Category</label>
+                  <div class="col-sm-9">
+                      <select value="project_show.category" (change)="changeCategory(category)" #selectTipo="ngModel" name="category" [(ngModel)]="project_show.category" class="form-control">
+                          <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
+                      </select>
+                </div>
+                </div>
   </form><hr>
 
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-warning" (click)="activeModal.close('Close click')">Update</button>
+    <button type="button" class="btn btn-warning" (click)="updateNote()">Update</button>
       <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
@@ -71,7 +80,44 @@ export class NgbdModalContent {
   @Input() project_show;
   @Input() id;
 
-  constructor(public activeModal: NgbActiveModal) {
+  public categories: Array<Project>;
+
+  constructor(public activeModal: NgbActiveModal,
+    private _projectCategoryService: ProjectCategoryService,
+    private _projectService: ProjectService) {
+      this.getProjectCategoryData();
+  }
+
+  getProjectCategoryData() {
+    this._projectCategoryService.list().subscribe(
+      response => {
+        if (!response.projectcategories) { } else {
+          let categories = response.projectcategories;
+          this.categories = categories;
+        }
+      },
+      error => { }
+    );
+  }
+
+  changeCategory(category_name) {
+    this.categories.forEach(category => {
+      if (category.name == category_name)
+        this.project_show.category = category.name;
+    });
+  }
+
+  updateNote() {
+    this._projectService.update(this.project_show, this.id).subscribe(
+      response => {
+        swal({
+          type: 'success',
+          title: 'Project has been updated',
+          showConfirmButton: false,
+        })
+      },
+      error => { }
+    );
   }
 }
 
@@ -167,7 +213,6 @@ export class SmartTableComponent {
   public categories: Array<ProjectCategory>;
   public project_register: Project;
   public user: any;
-
   constructor(
     private _projectCategoryService: ProjectCategoryService,
     private userService: UserService,
@@ -186,17 +231,22 @@ export class SmartTableComponent {
     this.getCategoyData();
     this.getData();
 
-    
+
   }
 
   open(event) {
     var id = event.data.id;
-    var project_show = new Project(event.data.name,event.data.icon,event.data.description,event.data.progress,event.data.category);
+    var project_show = new Project(event.data.name, event.data.icon, event.data.description, event.data.progress, event.data.category);
     const modalRef = this.modalService.open(NgbdModalContent, {
       size: 'lg',
     });
+
     modalRef.componentInstance.id = id;
     modalRef.componentInstance.project_show = project_show;
+
+    modalRef.result.then((result) => {
+      this.getData();
+    });
   }
 
 
@@ -204,15 +254,15 @@ export class SmartTableComponent {
   getCategoyData() {
     this._projectCategoryService.list().subscribe(
       response => {
-        if(!response.projectcategories){ }else{
+        if (!response.projectcategories) { } else {
           let categories = response.projectcategories;
           this.categories = categories;
         }
       },
-      error => { }	
+      error => { }
     );
   }
-  
+
   getData() {
     this._projectService.list().subscribe(
       response => {
@@ -247,11 +297,11 @@ export class SmartTableComponent {
   }
 
   changeCategory(category_name) {
-  this.categories.forEach(category => {
-    if (category.name == category_name)
-      this.project_register.category = category.name;
-  });
-} 
+    this.categories.forEach(category => {
+      if (category.name == category_name)
+        this.project_register.category = category.name;
+    });
+  }
 
   init(colors: any) {
     this.btn_settings = [{
@@ -297,7 +347,7 @@ export class SmartTableComponent {
           response => {
             this.getData();
           },
-          error => { }	
+          error => { }
         );
       }
     })

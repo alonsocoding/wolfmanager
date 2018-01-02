@@ -36,6 +36,27 @@ export class FinanceCategoryService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.get(this.url+'financecategory/list', options)
 						 .map(res => res.json());
+    }
+
+    // Update a single Finance Category
+    update(financecategory_to_update, id){
+		let params = JSON.stringify(financecategory_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'financecategory/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
 	}
+    
+    // Delete a single Project Category
+    delete(id: string){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url+'financecategory/delete/'+id, options)
+						 .map(res => res.json());
+    }
 
 }

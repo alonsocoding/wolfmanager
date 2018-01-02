@@ -29,6 +29,18 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+  update(req, res) {
+    return TeamMember
+      .update({
+        username: req.body.username,
+        project_name: req.body.project_name,
+        role: req.body.role
+      }, {
+        where: { id: req.params.teammemberId }
+      })
+      .then((teammember) => res.status(201).send(teammember))
+      .catch((error) => res.status(400).send(error));
+  },
   destroy(req, res) {
     return TeamMember
       .findById(req.params.teammemberId)

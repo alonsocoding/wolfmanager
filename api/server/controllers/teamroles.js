@@ -38,6 +38,27 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+  update(req, res) {
+    return TeamRole
+      .update({
+        name: req.body.name,
+        project: req.body.project,
+        task: req.body.task,
+        team: req.body.team,
+        time: req.body.time,
+        file: req.body.file,
+        calendar: req.body.calendar,
+        finance: req.body.finance,
+        notes: req.body.notes,
+        reports: req.body.reports,
+        client: req.body.client,
+        map: req.body.map
+      }, {
+        where: { id: req.params.teamroleId }
+      })
+      .then((teamrole) => res.status(201).send(teamrole))
+      .catch((error) => res.status(400).send(error));
+  },
   destroy(req, res) {
     return TeamRole
       .findById(req.params.teamroleId)

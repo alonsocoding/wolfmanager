@@ -7,6 +7,9 @@ var api = express.Router();
 api.get('/financecategory/list', financeCategoryController.list);
 api.get('/financecategory/update/:financecategoryId', financeCategoryController.retrieve);
 
+// Update the note
+api.put('/financecategory/update/:financecategoryId', financeCategoryController.update);
+
 // Create a new finance category
 api.post('/financecategory/insert', financeCategoryController.create);
 

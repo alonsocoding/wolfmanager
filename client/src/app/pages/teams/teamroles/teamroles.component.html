@@ -5,66 +5,67 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" 
-    [source]="source" 
-    (edit)="editProject()"
-    (delete)="deleteProject($event)">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="open($event)" (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New Team Role</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group row">
-                  <label for="inputName" class="col-sm-3 col-form-label">File Name</label>
-                  <div class="col-sm-9">
-                    <input name="name" [(ngModel)]="teamrole_register.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
-                  </div>
-                </div>
-                <div class="form-group validation-checkboxes row">
-                  <label for="inputName" class="col-sm-12 col-form-label"><strong>Permission</strong><hr></label>
-                  <label for="inputName" class="col-sm-4 col-form-label">Project Admin<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="project" [(ngModel)]="teamrole_register.project">Complete access to all sections of Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Task Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="task" [(ngModel)]="teamrole_register.task">Can add, edit and remove tasks for the Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Team Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="team" [(ngModel)]="teamrole_register.team">Can add, edit and remove members on the Project, Can't remove Admins</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Time Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="time" [(ngModel)]="teamrole_register.time">Can add, edit and remove for the Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">File Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="file" [(ngModel)]="teamrole_register.file">Can add, edit and remove files for the Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Calendar Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="calendar" [(ngModel)]="teamrole_register.calendar">Can add, edit and remove events for the Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Finance Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="finance" [(ngModel)]="teamrole_register.finance">Can add, edit and remove entries for Project Finance</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Notes Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="notes" [(ngModel)]="teamrole_register.notes">Can add, edit and remove notes for Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Reports Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="reports" [(ngModel)]="teamrole_register.reports">Can view the reports for Project</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Client<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="client" [(ngModel)]="teamrole_register.client">Client Role allows the user to view Task descriptions, Project Descriptions and Progress</nb-checkbox>
-                  <label for="inputName" class="col-sm-4 col-form-label">Map Project Role<br></label>
-                  <nb-checkbox status="success" class="col-sm-8" name="map" [(ngModel)]="teamrole_register.map">Can view the map for Project</nb-checkbox>
-                  
-                </div>
 
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Team Role</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Team Role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-3 col-form-label">File Name</label>
+            <div class="col-sm-9">
+              <input name="name" [(ngModel)]="teamrole_register.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
+            </div>
+          </div>
+          <div class="form-group validation-checkboxes row">
+            <label for="inputName" class="col-sm-12 col-form-label">
+              <strong>Permission</strong>
+              <hr>
+            </label>
+            <label for="inputName" class="col-sm-4 col-form-label">Project Admin
+              <br>
+            </label>
+            <nb-checkbox status="success" class="col-sm-8" name="project" [(ngModel)]="teamrole_register.project">Complete access to all sections of Project</nb-checkbox>
+            <label for="inputName" class="col-sm-4 col-form-label">Task Project Role
+              <br>
+            </label>
+            <nb-checkbox status="success" class="col-sm-8" name="task" [(ngModel)]="teamrole_register.task">Can add, edit and remove tasks for the Project</nb-checkbox>
+            <label for="inputName" class="col-sm-4 col-form-label">Team Project Role
+              <br>
+            </label>
+            <nb-checkbox status="success" class="col-sm-8" name="team" [(ngModel)]="teamrole_register.team">Can add, edit and remove members on the Project, Can't remove Admins</nb-checkbox>
+            <label for="inputName" class="col-sm-4 col-form-label">Finance Project Role
+              <br>
+            </label>
+            <nb-checkbox status="success" class="col-sm-8" name="finance" [(ngModel)]="teamrole_register.finance">Can add, edit and remove entries for Project Finance</nb-checkbox>
+            <label for="inputName" class="col-sm-4 col-form-label">Notes Project Role
+              <br>
+            </label>
+            <nb-checkbox status="success" class="col-sm-8" name="notes" [(ngModel)]="teamrole_register.notes">Can add, edit and remove notes for Project</nb-checkbox>
+            <label for="inputName" class="col-sm-4 col-form-label">Map Project Role
+              <br>
+            </label>
+            <nb-checkbox status="success" class="col-sm-8" name="map" [(ngModel)]="teamrole_register.map">Can view the map for Project</nb-checkbox>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Team Role</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>

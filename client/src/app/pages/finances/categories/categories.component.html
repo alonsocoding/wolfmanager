@@ -5,7 +5,7 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editProject()" (delete)="deleteProject()">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="open($event)" (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
@@ -38,7 +38,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" (click)="insert()">Save Finance Category</button>
+        <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Entry Category</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

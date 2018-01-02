@@ -10,16 +10,39 @@ module.exports = {
         start_date: req.body.start_date,
         due_date: req.body.due_date,
         status: req.body.status,
-        projectId: req.params.projectId })
+        projectId: req.params.projectId
+      })
       .then((task) => res.status(201).send(task))
       .catch((error) => res.status(400).send(error));
   },
   list(req, res) {
     return Task
-        .all()
-        .then(tasks => res.status(200).send({tasks: tasks}))
-        .catch(error => res.status(400).send(error));
+      .all()
+      .then(tasks => res.status(200).send({ tasks: tasks }))
+      .catch(error => res.status(400).send(error));
   },
+  update(req, res) {
+    return Task
+      .update({
+        name: req.body.name,
+        overview: req.body.overview,
+        project_name: req.body.project_name,
+        start_date: req.body.start_date,
+        due_date: req.body.due_date,
+        status: req.body.status,
+        projectId: req.params.projectId
+      }, {
+        where: { id: req.params.taskId }
+      })
+      .then((task) => res.status(201).send(task))
+      .catch((error) => res.status(400).send(error));
+  },
+  countAll(req, res) {
+    return Task
+    .findAndCountAll()
+    .then((result) => res.status(201).send(result))
+    .catch((error) => res.status(400).send(error));
+},
   destroy(req, res) {
     return Task
       .find({
@@ -42,6 +65,6 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   destroyAll(req, res) {
-    return Task.destroy({where: {}}).then(function () {});
+    return Task.destroy({ where: {} }).then(function () { });
   },
 };

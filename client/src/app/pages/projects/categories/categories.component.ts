@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectCategoryService } from '../../../services/projectcategory.service';
 import { ProjectCategory } from '../../../models/ProjectCategory';
 
@@ -11,6 +11,66 @@ import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
 
 import swal from 'sweetalert2';
+
+
+
+@Component({
+  selector: 'ngbd-modal-content',
+  providers: [ProjectCategoryService],
+  styleUrls: ['./categories.component.scss'],
+  template: `
+    <div class="modal-header modal-lg">
+      <h4 class="modal-title">Project Information</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    <form>
+          <div class="form-group row">
+            <label for="inputName" class="col-sm-3 col-form-label">Category Name</label>
+            <div class="col-sm-9">
+              <input name="name" [(ngModel)]="projectcategory_show.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the category">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputProgress" class="col-sm-3 col-form-label">Color</label>
+            <div class="col-sm-9">
+              <input type="color" class="form-control" id="exampleInputColor1" name="color" [(ngModel)]="projectcategory_show.color" >
+            </div>
+          </div>
+        </form><hr>
+
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="updateNote()">Update</button>
+      <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent2 {
+
+  @Input() projectcategory_show;
+  @Input() id;
+
+
+  constructor(public activeModal: NgbActiveModal,
+    private _projectCategoryService: ProjectCategoryService) {
+  }
+  updateNote() {
+    this._projectCategoryService.update(this.projectcategory_show, this.id).subscribe(
+      response => {
+        swal({
+          type: 'success',
+          title: 'Project Category has been updated',
+          showConfirmButton: false,
+        })
+      },
+      error => { }
+    );
+  }
+}
 
 @Component({
   selector: 'button-view',
@@ -57,7 +117,7 @@ export class CategoryComponent {
       add: false,
     },
     edit: {
-      editButtonContent: '<i class="nb-edit" (click)="editProject()"></i>',
+      editButtonContent: '<i class="nb-search" (click)="editProject()"></i>',
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -94,6 +154,21 @@ export class CategoryComponent {
       this.init(theme.variables);
     });
     this.getData();
+  }
+
+  open(event) {
+    var id = event.data.id;
+    var projectcategory_show = new ProjectCategory(event.data.name,event.data.color);
+    const modalRef = this.modalService.open(NgbdModalContent2, {
+      size: 'lg',
+    });
+
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.projectcategory_show = projectcategory_show;
+
+    modalRef.result.then((result) => {
+      this.getData();
+    });
   }
 
 

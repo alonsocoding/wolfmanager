@@ -47,5 +47,25 @@ export class UserService {
 		let options = new RequestOptions({ headers: headers });
 		return this._http.delete(this.url+'user/delete/'+id, options)
 						 .map(res => res.json());
+    }
+
+    count(){
+		let headers = new Headers({
+			'Content-Type':'application/json',
+		});
+
+		let options = new RequestOptions({ headers: headers });
+		return this._http.get(this.url+'user/count', options)
+						 .map(res => res.json());
+    }
+    
+    // Update a single User
+    update(user_to_update, id){
+		let params = JSON.stringify(user_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'user/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
 	}
 }

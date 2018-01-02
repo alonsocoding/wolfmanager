@@ -13,6 +13,7 @@ import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ngbd-modal-content',
+  providers: [TaskService, ProjectService],
   template: `
     <div class="modal-header modal-lg">
       <h4 class="modal-title">Task Information</h4>
@@ -37,15 +38,23 @@ import { OnInit, Input, Output, EventEmitter } from '@angular/core';
                 </div>
                 </div>
                 <div class="form-group row">
+                    <label for="inputProjectName" class="col-sm-3 col-form-label">Project</label>
+                    <div class="col-sm-9">
+                        <select value="task_show.project" (change)="changeProject(project)" #selectTipo="ngModel" name="project" [(ngModel)]="task_show.project_name" class="form-control">
+                            <option *ngFor="let project of projects" value="{{project.name}}">{{project.name}}</option>
+                        </select>
+                  </div>
+                  </div>
+                <div class="form-group row">
                 <label for="inputStartDate" class="col-sm-3 col-form-label">Start Date</label>
                 <div class="col-sm-9">
-                  <input name="start_date" [(ngModel)]="task_show.start_date" type="date" class="form-control" id="inputProgress" placeholder="Enter the start date of the task">
+                  <input name="start_date" [(ngModel)]="task_show.start_date" type="text" class="form-control" id="inputProgress" placeholder="Enter the start date of the task">
                 </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputDueDate" class="col-sm-3 col-form-label">Due Date</label>
                     <div class="col-sm-9">
-                      <input name="due_date" [(ngModel)]="task_show.due_date" type="date" class="form-control" id="inputProgress" placeholder="Enter due date of the task">
+                      <input name="due_date" [(ngModel)]="task_show.due_date" type="text" class="form-control" id="inputProgress" placeholder="Enter due date of the task">
                     </div>
                     </div>
                     <div class="form-group row">
@@ -64,7 +73,7 @@ import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-warning" (click)="activeModal.close('Close click')">Update</button>
+    <button type="button" class="btn btn-warning" (click)="updateTask()">Update</button>
       <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
@@ -74,8 +83,47 @@ export class NgbdModalContent {
   @Input() task_show;
   @Input() id;
 
-  constructor(public activeModal: NgbActiveModal) {
+  public projects: Array<Project>;
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private _projectService: ProjectService,
+    private _taskService: TaskService, ) {
+      this.getProjectData();
   }
+
+  changeProject(project_name) {
+    this.projects.forEach(project => {
+      if (project.name == project_name)
+        this.task_show.project_name = project.name;
+    });
+  }
+
+  getProjectData() {
+    this._projectService.list().subscribe(
+      response => {
+        if (!response.projects) { } else {
+          let projects = response.projects;
+          this.projects = projects;
+        }
+      },
+      error => { }
+    );
+  }
+
+  updateTask() {
+    this._taskService.update(this.task_show, this.id).subscribe(
+      response => {
+        swal({
+          type: 'success',
+          title: 'Task has been updated',
+          showConfirmButton: false,
+        })
+      },
+      error => { }
+    );
+  }
+
 }
 
 
@@ -171,28 +219,55 @@ export class AllTasksComponent {
       if (project.name == project_name)
         this.task_register.project_name = project.name;
     });
-  } 
+  }
+
+  changeFormatDate(date) {
+    var d = new Date(date);
+    var month = '' + (d.getMonth() + 1);
+    var day = '' + d.getDate();
+    var year = d.getFullYear();
+    var time = d.getHours() + ':' + d.getMinutes();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [month, day, year].join('/');
+  }
+
 
   getProjectData() {
     this._projectService.list().subscribe(
       response => {
-        if(!response.projects){ }else{
+        if (!response.projects) { } else {
           let projects = response.projects;
           this.projects = projects;
         }
       },
-      error => { }	
+      error => { }
     );
   }
 
   open(event) {
+
     var id = event.data.id;
-    var task_show = new Task(event.data.name,event.data.overview,event.data.project_name,event.data.start_date,event.data.due_date,event.data.status);
+
+    var task_show = new Task(event.data.name,
+      event.data.overview,
+      event.data.project_name,
+      this.changeFormatDate(event.data.start_date),
+      this.changeFormatDate(event.data.due_date),
+      event.data.status);
+
     const modalRef = this.modalService.open(NgbdModalContent, {
       size: 'lg',
     });
+
     modalRef.componentInstance.id = id;
     modalRef.componentInstance.task_show = task_show;
+
+    modalRef.result.then((result) => {
+      this.getData();
+    });
   }
 
 
@@ -274,7 +349,7 @@ export class AllTasksComponent {
           response => {
             this.getData();
           },
-          error => { }	
+          error => { }
         );
       }
     })

@@ -5,54 +5,56 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" 
-    [source]="source" 
-    (edit)="editProject()"
-    (delete)="deleteProject($event)">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="open($event)" (delete)="deleteProject($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New Team Member</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group row">
-                  <label for="inputUsername" class="col-sm-3 col-form-label">Username</label>
-                  <div class="col-sm-9">
-                    <input name="username" [(ngModel)]="teammember_register.username" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
-                  </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputProject" class="col-sm-3 col-form-label">Project Name</label>
-                    <div class="col-sm-9">
-                      <input name="project_name" [(ngModel)]="teammember_register.project_name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="inputRole" class="col-sm-3 col-form-label">Role</label>
-                      <div class="col-sm-9">
-                        <input name="role" [(ngModel)]="teammember_register.role" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
-                      </div>
-                    </div>
-                
 
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Team Member</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Team Member</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label for="inputUsername" class="col-sm-3 col-form-label">Username</label>
+            <div class="col-sm-9">
+              <select (change)="changeUsername(user)" #selectTipo="ngModel" name="user" [(ngModel)]="user" class="form-control">
+                <option *ngFor="let user of users" value="{{user.username}}">{{user.username}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputProject" class="col-sm-3 col-form-label">Project Name</label>
+            <div class="col-sm-9">
+              <select (change)="changeProject(project)" #selectTipo="ngModel" name="project" [(ngModel)]="project" class="form-control">
+                <option *ngFor="let project of projects" value="{{project.name}}">{{project.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputRole" class="col-sm-3 col-form-label">Role</label>
+            <div class="col-sm-9">
+              <select (change)="changeRole(role)" #selectTipo="ngModel" name="role" [(ngModel)]="role" class="form-control">
+                <option *ngFor="let role of teamroles" value="{{role.name}}">{{role.name}}</option>
+              </select>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="insert()" data-dismiss="modal">Save Team Member</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-
+</div>

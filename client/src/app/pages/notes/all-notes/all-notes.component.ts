@@ -93,16 +93,16 @@ export class NgbdModalContent {
 
   updateNote() {
     this._noteService.update(this.note_show, this.id).subscribe(
-    response => {
-      swal({
-        type: 'success',
-        title: 'Note has been updated',
-        showConfirmButton: false,
-      })
-    },
-        error => {}	
-  );
-}
+      response => {
+        swal({
+          type: 'success',
+          title: 'Note has been updated',
+          showConfirmButton: false,
+        })
+      },
+      error => { }
+    );
+  }
 }
 
 
@@ -241,8 +241,8 @@ export class AllNotesComponent {
     modalRef.componentInstance.id = id;
     modalRef.componentInstance.note_show = note_show;
 
-    modalRef.result.then((result) => { 
-      this.getData();          
+    modalRef.result.then((result) => {
+      this.getData();
     });
   }
 

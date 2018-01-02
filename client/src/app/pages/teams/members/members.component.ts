@@ -1,11 +1,109 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
 import swal from 'sweetalert2';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
+
+import { OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+
+@Component({
+  selector: 'ngbd-modal-content',
+  providers: [UserService],
+  template: `
+    <div class="modal-header modal-lg">
+      <h4 class="modal-title">User Information</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    <form>
+          <div class="form-group row">
+            <label for="inputFirstName" class="col-sm-3 col-form-label">First Name</label>
+            <div class="col-sm-9">
+              <input name="first_name" [(ngModel)]="user_show.first_name" type="name" class="form-control" id="inputFirstName" placeholder="Enter the first name of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputLastName" class="col-sm-3 col-form-label">Last Name</label>
+            <div class="col-sm-9">
+              <input name="last_name" [(ngModel)]="user_show.last_name" type="name" class="form-control" id="inputLastName" placeholder="Enter the last name of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputUsername" class="col-sm-3 col-form-label">Username</label>
+            <div class="col-sm-9">
+              <input name="username" [(ngModel)]="user_show.username" type="name" class="form-control" id="inputUsername" placeholder="Enter the username of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input name="email" [(ngModel)]="user_show.email" type="name" class="form-control" id="inputEmail" placeholder="Enter the email of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input name="password" [(ngModel)]="user_show.password" type="name" class="form-control" id="inputPassword" placeholder="Enter the password of the member">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputRole" class="col-sm-3 col-form-label">Role</label>
+            <div class="col-sm-9">
+              <input name="role" [(ngModel)]="user_show.role" type="name" class="form-control" id="inputRole" placeholder="Enter the role of the member">
+            </div>
+          </div>
+
+
+
+        </form><hr>
+
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="updateUser()">Update</button>
+      <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+
+  @Input() user_show;
+  @Input() id;
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private _userService: UserService ) {
+
+  }
+
+
+  updateUser() {
+    this._userService.update(this.user_show, this.id).subscribe(
+      response => {
+        swal({
+          type: 'success',
+          title: 'User has been updated',
+          showConfirmButton: false,
+        })
+      },
+      error => { }
+    );
+  }
+
+}
+
+
+
+
+
+
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './members.component.html',
@@ -105,6 +203,26 @@ export class MembersComponent {
     );
   }
 
+  open(event) {
+
+    var id = event.data.id;
+
+    var user_show = new User(event.data.first_name,
+      event.data.last_name,event.data.username,event.data.email,
+      event.data.password,event.data.role);
+
+    const modalRef = this.modalService.open(NgbdModalContent, {
+      size: 'lg',
+    });
+
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.user_show = user_show;
+
+    modalRef.result.then((result) => {
+      this.getData();
+    });
+  }
+
   insert() {
     this._userService.insert(this.user_register).subscribe(
       response => {
@@ -152,7 +270,7 @@ export class MembersComponent {
 
   deleteProject(event): void {
     swal({
-      title: 'Delete the project?',
+      title: 'Delete the member?',
       text: "You won't be able to revert this",
       type: 'info',
       showCancelButton: true,
@@ -163,7 +281,7 @@ export class MembersComponent {
       if (result.value) {
         swal(
           'Deleted',
-          'Your project has been deleted.',
+          'The member has been deleted.',
           'success'
         )
         this._userService.delete(event.data.id).subscribe(

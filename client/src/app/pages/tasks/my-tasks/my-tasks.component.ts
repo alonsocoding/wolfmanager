@@ -1,15 +1,137 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbThemeService } from '@nebular/theme';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TaskService } from '../../../services/task.service';
 import { Task } from '../../../models/Task';
-
+import { ProjectService } from '../../../services/project.service';
+import { Project } from '../../../models/Project';
+import swal from 'sweetalert2';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
+import { OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+
+@Component({
+  selector: 'ngbd-modal-content',
+  providers: [TaskService, ProjectService],
+  template: `
+    <div class="modal-header modal-lg">
+      <h4 class="modal-title">Task Information</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    <form>
+                <div class="form-group row">
+                  <label for="inputName" class="col-sm-3 col-form-label">Task Name</label>
+                  <div class="col-sm-9">
+                    <input name="name" [(ngModel)]="task_show.name" type="name" class="form-control" id="inputName" placeholder="Enter the name of the task">
+                  </div>
+                </div>
+                <div class="form-group row">
+                <label for="inputDescription" class="col-sm-3 col-form-label">Task Description</label>
+                <div class="col-sm-9">
+                  <!--<ngx-tiny-mce></ngx-tiny-mce>-->
+                  <textarea rows="5" name="overview" [(ngModel)]="task_show.overview" type="name" class="form-control" id="inputDescription" placeholder="Enter the description of the task"></textarea>
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputProjectName" class="col-sm-3 col-form-label">Project</label>
+                    <div class="col-sm-9">
+                        <select value="task_show.project" (change)="changeProject(project)" #selectTipo="ngModel" name="project" [(ngModel)]="task_show.project_name" class="form-control">
+                            <option *ngFor="let project of projects" value="{{project.name}}">{{project.name}}</option>
+                        </select>
+                  </div>
+                  </div>
+                <div class="form-group row">
+                <label for="inputStartDate" class="col-sm-3 col-form-label">Start Date</label>
+                <div class="col-sm-9">
+                  <input name="start_date" [(ngModel)]="task_show.start_date" type="text" class="form-control" id="inputProgress" placeholder="Enter the start date of the task">
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDueDate" class="col-sm-3 col-form-label">Due Date</label>
+                    <div class="col-sm-9">
+                      <input name="due_date" [(ngModel)]="task_show.due_date" type="text" class="form-control" id="inputProgress" placeholder="Enter due date of the task">
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputStatus" class="col-sm-3 col-form-label">Status</label>
+                        <div class="col-sm-9">
+                        <select class="form-control" name="status" [(ngModel)]="task_show.status">
+                          <option>New</option>
+                          <option>In Progress</option>
+                          <option>Completed</option>
+                          <option>On Hold</option>
+                          <option>Cancelled</option>
+                        </select>
+                      </div>
+                      </div>
+              </form><hr>
+
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="updateTask()">Update</button>
+      <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent2 {
+
+  @Input() task_show;
+  @Input() id;
+
+  public projects: Array<Project>;
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private _projectService: ProjectService,
+    private _taskService: TaskService, ) {
+      this.getProjectData();
+  }
+
+  changeProject(project_name) {
+    this.projects.forEach(project => {
+      if (project.name == project_name)
+        this.task_show.project_name = project.name;
+    });
+  }
+
+  getProjectData() {
+    this._projectService.list().subscribe(
+      response => {
+        if (!response.projects) { } else {
+          let projects = response.projects;
+          this.projects = projects;
+        }
+      },
+      error => { }
+    );
+  }
+
+  updateTask() {
+    this._taskService.update(this.task_show, this.id).subscribe(
+      response => {
+        swal({
+          type: 'success',
+          title: 'Task has been updated',
+          showConfirmButton: false,
+        })
+      },
+      error => { }
+    );
+  }
+
+}
+
+
+
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './my-tasks.component.html',
-  providers: [TaskService],
+  providers: [TaskService, ProjectService],
   styleUrls: ['./my-tasks.component.scss'],
 
 })
@@ -38,14 +160,13 @@ export class MyTasksComponent {
       },
       status: {
         title: 'Status',
-        type: 'string',
+        type: 'html',
+        valuePrepareFunction: (cell, row) => {
+          return `<span class="badge badge-success">${row.status}</span>`;
+        }
       },
       project_name: {
         title: 'Project Name',
-        type: 'string',
-      },
-      progres: {
-        title: 'Progress',
         type: 'string',
       },
       due_date: {
@@ -61,7 +182,7 @@ export class MyTasksComponent {
           if (month.length < 2) month = '0' + month;
           if (day.length < 2) day = '0' + day;
 
-          return [day, month, year].join('-') + " " + time;
+          return [day, month, year].join('-');
         }
       },
     },
@@ -71,20 +192,82 @@ export class MyTasksComponent {
   btn_settings: Array<any>;
   public tasks: Array<Task>; // Arreglo de asociados
   public task_register: Task;
+  public projects: Array<Project>;
 
   constructor(
     private service: SmartTableService,
     private _taskService: TaskService,
+    private _projectService: ProjectService,
     private themeService: NbThemeService,
     private modalService: NgbModal) {
 
+    this.projects = new Array<Project>();
     this.task_register = new Task('', '', '', '', '', '');
     this.tasks = new Array<Task>();
     this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
       this.themeName = theme.name;
       this.init(theme.variables);
     });
+
+    this.getProjectData();
     this.getData();
+
+  }
+
+  changeProject(project_name) {
+    this.projects.forEach(project => {
+      if (project.name == project_name)
+        this.task_register.project_name = project.name;
+    });
+  }
+
+  changeFormatDate(date) {
+    var d = new Date(date);
+    var month = '' + (d.getMonth() + 1);
+    var day = '' + d.getDate();
+    var year = d.getFullYear();
+    var time = d.getHours() + ':' + d.getMinutes();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [month, day, year].join('/');
+  }
+
+
+  getProjectData() {
+    this._projectService.list().subscribe(
+      response => {
+        if (!response.projects) { } else {
+          let projects = response.projects;
+          this.projects = projects;
+        }
+      },
+      error => { }
+    );
+  }
+
+  open(event) {
+
+    var id = event.data.id;
+
+    var task_show = new Task(event.data.name,
+      event.data.overview,
+      event.data.project_name,
+      this.changeFormatDate(event.data.start_date),
+      this.changeFormatDate(event.data.due_date),
+      event.data.status);
+
+    const modalRef = this.modalService.open(NgbdModalContent2, {
+      size: 'lg',
+    });
+
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.task_show = task_show;
+
+    modalRef.result.then((result) => {
+      this.getData();
+    });
   }
 
 
@@ -107,6 +290,11 @@ export class MyTasksComponent {
         let task = response.task;
         this.source = new LocalDataSource();
         this.getData();
+        swal({
+          type: 'success',
+          title: 'Task has been saved',
+          showConfirmButton: false,
+        })
         if (!task) { } else {
           this.task_register = task;
           this.task_register = new Task('', '', '', '', '', '');
@@ -141,8 +329,30 @@ export class MyTasksComponent {
     console.log("edit");
   }
 
-  deleteProject(): void {
-    console.log("delete");
+  deleteProject(event): void {
+    swal({
+      title: 'Delete the task?',
+      text: "You won't be able to revert this",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#4ca6ff',
+      cancelButtonColor: '#ff4c6a',
+      confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted',
+          'Your task has been deleted.',
+          'success'
+        )
+        this._taskService.delete(event.data.id).subscribe(
+          response => {
+            this.getData();
+          },
+          error => { }
+        );
+      }
+    })
   }
 }
 

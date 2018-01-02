@@ -10,6 +10,9 @@ api.get('/projectcategory/update/:projectcategoryId', projectCategoryController.
 // Create a new project category
 api.post('/projectcategory/insert', projectCategoryController.create);
 
+// Update the project
+api.put('/projectcategory/update/:projectcategoryId', projectCategoryController.update);
+
 // Delete a project with id
 api.delete('/projectcategory/delete/:projectcategoryId', projectCategoryController.destroy);
 

@@ -9,7 +9,8 @@ module.exports = {
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
-                role: req.body.role })
+                role: req.body.role
+            })
             .then((user) => res.status(201).send(user))
             .catch((error) => res.status(400).send(error));
     },
@@ -31,6 +32,27 @@ module.exports = {
                 return res.status(200).send(user);
             })
             .catch((error) => res.status(400).send(error));
+    },
+    update(req, res) {
+        return User
+            .update({
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                role: req.body.role
+            }, {
+                where: { id: req.params.userId }
+            })
+            .then((user) => res.status(201).send(user))
+            .catch((error) => res.status(400).send(error));
+    },
+    countAll(req, res) {
+        return User
+        .findAndCountAll()
+        .then((result) => res.status(201).send(result))
+        .catch((error) => res.status(400).send(error));
     },
     destroy(req, res) {
         return User

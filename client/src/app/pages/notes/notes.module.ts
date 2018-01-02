@@ -8,6 +8,8 @@ import { ToasterModule } from 'angular2-toaster';
 
 import { ImageViewComponent } from './all-notes/all-notes.component';
 import { NgbdModalContent } from './all-notes/all-notes.component';
+import { ImageViewComponent2 } from './my-notes/my-notes.component';
+import { NgbdModalContent2 } from './my-notes/my-notes.component';
 
 const components = [
 ];
@@ -24,11 +26,15 @@ const components = [
     ...routedComponents,
     ...components,
     ImageViewComponent,
-    NgbdModalContent
+    NgbdModalContent,
+    ImageViewComponent2,
+    NgbdModalContent2
   ],
   entryComponents: [
     ImageViewComponent,
-    NgbdModalContent
+    NgbdModalContent,
+    ImageViewComponent2,
+    NgbdModalContent2
   ],
   providers: [
     SmartTableService,

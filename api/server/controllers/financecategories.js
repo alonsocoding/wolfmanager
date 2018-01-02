@@ -28,6 +28,15 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+  update(req, res) {
+    return FinanceCategory
+        .update({ 
+          name: req.body.name,
+          description: req.body.description },{
+            where: { id: req.params.financecategoryId }})
+        .then((financecategory) => res.status(201).send(financecategory))
+        .catch((error) => res.status(400).send(error));
+},
   destroy(req, res) {
     return FinanceCategory
       .findById(req.params.financecategoryId)

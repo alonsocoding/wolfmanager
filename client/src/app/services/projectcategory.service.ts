@@ -37,6 +37,16 @@ export class ProjectCategoryService {
 		return this._http.get(this.url+'projectcategory/list', options)
 						 .map(res => res.json());
     }
+
+    // Update a single Project Category
+    update(projectcategory_to_update, id){
+		let params = JSON.stringify(projectcategory_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'projectcategory/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
+	}
     
     // Delete a single Project Category
     delete(id: string){

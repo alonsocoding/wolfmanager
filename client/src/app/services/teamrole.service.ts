@@ -47,4 +47,14 @@ export class TeamRoleService {
         return this._http.delete(this.url + 'teamrole/delete/' + id, options)
             .map(res => res.json());
     }
+
+    // Update a single Team role
+    update(teamrole_to_update, id){
+		let params = JSON.stringify(teamrole_to_update);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.put(this.url+'teamrole/update/'+id, 
+			params, {headers: headers})
+						 .map(res => res.json());
+	}
 }

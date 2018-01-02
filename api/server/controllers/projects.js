@@ -9,15 +9,16 @@ module.exports = {
         icon: req.body.icon,
         description: req.body.description,
         progress: req.body.progress,
-        category: req.body.category })
+        category: req.body.category
+      })
       .then((project) => res.status(201).send(project))
       .catch((error) => res.status(400).send(error));
   },
   list(req, res) {
     return Project
-        .all()
-        .then(projects => res.status(200).send({projects: projects}))
-        .catch(error => res.status(400).send(error));
+      .all()
+      .then(projects => res.status(200).send({ projects: projects }))
+      .catch(error => res.status(400).send(error));
   },
   list_tasks(req, res) {
     return Project
@@ -62,6 +63,26 @@ module.exports = {
           .then(() => res.status(204).send())
           .catch((error) => res.status(400).send(error));
       })
+      .catch((error) => res.status(400).send(error));
+  },
+  update(req, res) {
+    return Project
+      .update({
+        name: req.body.name,
+        icon: req.body.icon,
+        description: req.body.description,
+        progress: req.body.progress,
+        category: req.body.category
+      }, {
+        where: { id: req.params.projectId }
+      })
+      .then((project) => res.status(201).send(project))
+      .catch((error) => res.status(400).send(error));
+  },
+  countAll(req, res) {
+      return Project
+      .findAndCountAll()
+      .then((result) => res.status(201).send(result))
       .catch((error) => res.status(400).send(error));
   },
   destroyAll(req, res) {
