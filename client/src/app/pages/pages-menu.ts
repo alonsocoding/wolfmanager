@@ -120,11 +120,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/notes/all-notes',
       }]
   },
-  {
-    title: 'Maps',
-    icon: 'ion-ios-location-outline',
-    link: '/pages/maps/gmaps',
-  },
+  //{
+  //  title: 'Maps',
+  //  icon: 'ion-ios-location-outline',
+  //  link: '/pages/maps/gmaps',
+  //},
   {
     title: 'Settings',
     icon: 'ion-ios-gear-outline',
