@@ -3,16 +3,16 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 var path = require('path');
 
-var project_routes = require('./server/routes/project');
-var task_routes = require('./server/routes/task');
-var projectcategory_routes = require('./server/routes/projectcategory');
-var file_routes = require('./server/routes/file');
-var teamrole_routes = require('./server/routes/teamrole');
-var user_routes = require('./server/routes/user');
-var teammember_routes = require('./server/routes/teammember');
-var financecategory_routes = require('./server/routes/financecategory');
-var entry_routes = require('./server/routes/entry');
-var note_routes = require('./server/routes/note');
+var project_routes = require('./routes/project');
+var task_routes = require('./routes/task');
+var projectcategory_routes = require('./routes/projectcategory');
+var file_routes = require('./routes/file');
+var teamrole_routes = require('./routes/teamrole');
+var user_routes = require('./routes/user');
+var teammember_routes = require('./routes/teammember');
+var financecategory_routes = require('./routes/financecategory');
+var entry_routes = require('./routes/entry');
+var note_routes = require('./routes/note');
 
 const app = express();
 app.use(logger('dev'));
