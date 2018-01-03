@@ -9,6 +9,9 @@ api.get('/user/list', userController.list);
 // Create a new user
 api.post('/user/insert', userController.create);
 
+// Login
+api.post('/user/login', userController.login);
+
 // Update the user
 api.put('/user/update/:userId', userController.update);
 

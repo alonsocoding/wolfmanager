@@ -38,6 +38,26 @@ export class UserService {
 						 .map(res => res.json());
 	}
 
+	// Get the user identity
+	getIdentity() {
+        let identity = JSON.parse(localStorage.getItem('identity'));
+        if(identity != 'undefined') {
+                this.identity = identity;
+        } else {
+            this.identity = null;
+        }
+        return identity;
+    }
+
+	// Login 
+    login(user_login){
+		let params = JSON.stringify(user_login);
+		let headers = new Headers({'Content-Type':'application/json'});
+
+		return this._http.post(this.url+'user/login', params, {headers: headers})
+						 .map(res => res.json());
+	}
+
     // Delete a single user
     delete(id: string){
 		let headers = new Headers({

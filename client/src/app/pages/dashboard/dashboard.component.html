@@ -29,7 +29,12 @@
     <nb-card class="solar-card">
       <nb-card-header>Finances</nb-card-header>
       <nb-card-body>
-        <ngx-chartjs-line></ngx-chartjs-line>
+        <ngx-chartjs-line></ngx-chartjs-line><br>
+        <div class="row">
+            <div class="col-xs-12 col-md-4 infos"><strong>{{total_income}}</strong><br><label>Total Incomes</label></div>
+            <div class="col-xs-12 col-md-4 infos"><strong>{{total_expense}}</strong><br><label>Total Expenses</label></div>
+            <div class="col-xs-12 col-md-4 infos"><strong>{{total}}</strong><br><label>Total Profit</label></div>
+          </div>
       </nb-card-body>
     </nb-card>
   </div>
@@ -40,7 +45,7 @@
         <ul>
           <li *ngFor="let project of projects; let i = index">
             <label>{{project.name}}</label>
-            <ngb-progressbar showValue="true" type="success" [value]="value[0]" max="100"></ngb-progressbar>
+            <ngb-progressbar type="success" [value]="value[0]" max="100">{{project.progress}}</ngb-progressbar>
             <hr>
           </li>
         </ul>

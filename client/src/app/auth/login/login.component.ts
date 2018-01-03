@@ -6,9 +6,13 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxAuthBlockComponent } from '../auth-block/auth-block.component';
+import swal from 'sweetalert2';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'nb-login',
+  providers: [UserService],
   template: `
       <img src="../../../assets/images/wolf.png" class="img-icon"/> <br>
       <h2 class="title">Sign In to Wolf Manager</h2>
@@ -69,7 +73,7 @@ import { NgxAuthBlockComponent } from '../auth-block/auth-block.component';
         </div>
 
         <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-info"
-                [class.btn-pulse]="submitted" routerLink="../../pages/dashboard">
+                [class.btn-pulse]="submitted">
           Sign In
         </button>
       </form>
@@ -90,15 +94,49 @@ export class NgxLoginComponent {
 
   errors: string[] = [];
   messages: string[] = [];
-  user: any = {};
   submitted: boolean = false;
 
-  constructor() {
+  public user: User;
 
+  constructor(private _userService: UserService,
+    private _router: Router) {
+    this.user = new User('','','','','','');
   }
 
   login(): void {
-
+    this._userService.login(this.user).subscribe(
+      response => { console.log(response);
+        if (!response) { 
+          swal({
+            type: 'error',
+            title: 'The identity is incorrect',
+            showConfirmButton: false,
+          })
+        } else {
+          let user = response;
+          if(this.user.password == user.password) {
+            localStorage.setItem('identity', JSON.stringify(user));
+            this._router.navigate(['../../pages/dashboard']);
+            this.user = user;
+          } else {
+            swal({
+              type: 'error',
+              title: 'The password is incorrect',
+              showConfirmButton: false,
+            })
+          }
+          
+        }
+      },
+      error => { 
+        swal({
+          type: 'error',
+          title: 'The email is incorrect',
+          showConfirmButton: false,
+        })
+      }
+    );
+    console.log(this.user);
   }
 
   getConfigValue(key: string): any {

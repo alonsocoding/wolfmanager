@@ -65,6 +65,8 @@ export class DashboardComponent {
   public users: Array<User>;
   public entries: Array<Entry>;
 
+  
+
   themeName = 'default';
   themeSubscription: any;
   btn_settings: Array<any>;
@@ -76,18 +78,11 @@ export class DashboardComponent {
 public router: Router;
   public value;
 
+  public incomes; public expenses;
+  public total_income; public total_expense; public total;
+
   contacts: any[];
   recent: any[];
-
-  private userss = {
-    jose: { name: 'Jose Delgado', picture: 'assets/images/jose.png'},
-    nick: { name: 'Nick Jones', picture: 'assets/images/nick.png' },
-    eva: { name: 'Eva Moor', picture: 'assets/images/eva.png' },
-    jack: { name: 'Jack Williams', picture: 'assets/images/jack.png' },
-    lee: { name: 'Lee Wong', picture: 'assets/images/lee.png' },
-    alan: { name: 'Alan Thompson', picture: 'assets/images/alan.png' },
-    kate: { name: 'Kate Martinez', picture: 'assets/images/kate.png' },
-  };
 
   constructor(
     private _projectService: ProjectService,
@@ -97,6 +92,13 @@ public router: Router;
     private _entryService: EntryService,
     private themeService: NbThemeService,
     private modalService: NgbModal) {
+
+      this.incomes = [0,0,0,0,0,0,0,0,0,0,0,0];
+      this.expenses = [0,0,0,0,0,0,0,0,0,0,0,0];
+      this.total_income = 0; 
+      this.total_expense = 0;
+      this.total = 0;
+    
     this.value = new Array;
     this.value.push(100);
 
@@ -120,13 +122,8 @@ public router: Router;
     this.getUserData();
     this.getEntryData();
 
-    this.contacts = [
-          {user: this.userss.jose, type: 'mobile'},
-          {user: this.userss.eva, type: 'home'},
-          {user: this.userss.jack, type: 'mobile'},
-          {user: this.userss.lee, type: 'mobile'},
-        ];
   }
+
 
   sendProject() {
     this.router.navigate(['#/pages/projects/smart-table']);
@@ -138,6 +135,10 @@ public router: Router;
         if (!response.entries) { } else {
           let entries = response.entries;
           this.entries = entries;
+          this.entries.forEach(entry => {
+            parseInt(entry.amount) > 0 ? this.total_income+=parseInt(entry.amount) : this.total_expense+=parseInt(entry.amount);
+          });
+          this.total = this.total_income + this.total_expense;
         }
       },
       error => { }
@@ -175,6 +176,7 @@ public router: Router;
           this.source.load(response.projects);
           let projects = response.projects;
           this.projects = projects;
+          
           for(var i=0; i<projects.size; i++) {
             this.value.push(projects[i].progress);
           }

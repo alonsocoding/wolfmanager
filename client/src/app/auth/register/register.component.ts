@@ -10,43 +10,32 @@ import { Router } from '@angular/router';
   selector: 'nb-register',
   styleUrls: ['./register.component.scss'],
   template: `
-      <h2 class="title">Sign Up</h2>
+  <img src="../../../assets/images/wolf.png" class="img-icon"/> <br>
+      <h2 class="title">Sign Up to Wolf Manager</h2>
       <form (ngSubmit)="register()" #form="ngForm">
 
-        <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
-             class="alert alert-danger" role="alert">
-          <div><strong>Oh snap!</strong></div>
-          <div *ngFor="let error of errors">{{ error }}</div>
-        </div>
-        <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
-             class="alert alert-success" role="alert">
-          <div><strong>Hooray!</strong></div>
-          <div *ngFor="let message of messages">{{ message }}</div>
-        </div>
+      <div class="form-group row">
+      <label for="inputTitle" class="col-sm-3 col-form-label">First Name</label>
+      <div class="col-sm-9">
+        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your first name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputTitle" class="col-sm-3 col-form-label">Last Name</label>
+      <div class="col-sm-9">
+        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your last name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputTitle" class="col-sm-3 col-form-label">Username</label>
+      <div class="col-sm-9">
+        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your username">
+      </div>
+    </div>
 
-        <div class="form-group">
-          <label for="input-name" class="sr-only">Full name</label>
-          <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel"
-                 class="form-control" placeholder="Full name"
-                 [class.form-control-danger]="fullName.invalid && fullName.touched"
-                 [required]="getConfigValue('forms.validation.fullName.required')"
-                 [minlength]="getConfigValue('forms.validation.fullName.minLength')"
-                 [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
-                 autofocus>
-          <small class="form-text error" *ngIf="fullName.invalid && fullName.touched && fullName.errors?.required">
-            Full name is required!
-          </small>
-          <small
-            class="form-text error"
-            *ngIf="fullName.invalid && fullName.touched && (fullName.errors?.minlength || fullName.errors?.maxlength)">
-            Full name should contains
-            from {{getConfigValue('forms.validation.password.minLength')}}
-            to {{getConfigValue('forms.validation.password.maxLength')}}
-            characters
-          </small>
-        </div>
-
-        <div class="form-group">
+        <div class="form-group row">
+        <label for="inputTitle" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
           <label for="input-email" class="sr-only">Email address</label>
           <input name="email" [(ngModel)]="user.email" id="input-email" #email="ngModel"
                  class="form-control" placeholder="Email address" pattern=".+@.+\..+"
@@ -59,9 +48,12 @@ import { Router } from '@angular/router';
                  *ngIf="email.invalid && email.touched && email.errors?.pattern">
             Email should be the real one!
           </small>
+          </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
+        <label for="inputTitle" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
           <label for="input-password" class="sr-only">Password</label>
           <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
                  class="form-control" placeholder="Password" #password="ngModel"
@@ -79,10 +71,12 @@ import { Router } from '@angular/router';
             from {{ getConfigValue('forms.validation.password.minLength') }}
             to {{ getConfigValue('forms.validation.password.maxLength') }}
             characters
-          </small>
+          </small></div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
+        <label for="inputTitle" class="col-sm-3 col-form-label">Confirm Password</label>
+      <div class="col-sm-9">
           <label for="input-re-password" class="sr-only">Repeat password</label>
           <input
             name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
@@ -97,8 +91,15 @@ import { Router } from '@angular/router';
             class="form-text error"
             *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
             Password does not match the confirm password.
-          </small>
+          </small></div>
         </div>
+
+        <div class="form-group row">
+      <label for="inputTitle" class="col-sm-3 col-form-label">Role</label>
+      <div class="col-sm-9">
+        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your role">
+      </div>
+    </div>
 
         <div class="form-group accept-group col-sm-12" *ngIf="getConfigValue('forms.register.terms')">
           <nb-checkbox name="terms" [(ngModel)]="user.terms" [required]="getConfigValue('forms.register.terms')">
