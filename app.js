@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+var path = require('path');
 
 var project_routes = require('./server/routes/project');
 var task_routes = require('./server/routes/task');
@@ -18,6 +19,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Set Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Heads http
 

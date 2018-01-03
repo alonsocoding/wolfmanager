@@ -23,6 +23,10 @@ const routes: Routes = [{
   }, {
     path: 'reset-password',
     component: NgxResetPasswordComponent,
+  }, {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
   }],
 }];
 
