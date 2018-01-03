@@ -111,21 +111,20 @@ export class ChartjsLineComponent implements OnDestroy {
           this.entries.forEach(entry => {
             var month = new Date(entry.createdAt);
             switch(month.getMonth() + 1) {
-              case 1: entry.amount > 0 ? this.incomes[0] += parseInt(entry.amount) : this.expenses[0] += parseInt(entry.amount); break;
-              case 2: entry.amount > 0 ? this.incomes[1] += parseInt(entry.amount) : this.expenses[1] += parseInt(entry.amount); break;
-              case 3: entry.amount > 0 ? this.incomes[2] += parseInt(entry.amount) : this.expenses[2] += parseInt(entry.amount); break;
-              case 4: entry.amount > 0 ? this.incomes[3] += parseInt(entry.amount) : this.expenses[3] += parseInt(entry.amount); break;
-              case 5: entry.amount > 0 ? this.incomes[4] += parseInt(entry.amount) : this.expenses[4] += parseInt(entry.amount); break;
-              case 6: entry.amount > 0 ? this.incomes[5] += parseInt(entry.amount) : this.expenses[5] += parseInt(entry.amount); break;
-              case 7: entry.amount > 0 ? this.incomes[6] += parseInt(entry.amount) : this.expenses[6] += parseInt(entry.amount); break;
-              case 8: entry.amount > 0 ? this.incomes[7] += parseInt(entry.amount) : this.expenses[7] += parseInt(entry.amount); break;
-              case 9: entry.amount > 0 ? this.incomes[8] += parseInt(entry.amount) : this.expenses[8] += parseInt(entry.amount); break;
-              case 10: entry.amount > 0 ? this.incomes[9] += parseInt(entry.amount) : this.expenses[9] += parseInt(entry.amount); break;
-              case 11: entry.amount > 0 ? this.incomes[10] += parseInt(entry.amount) : this.expenses[10] += parseInt(entry.amount); break;
-              case 12: entry.amount > 0 ? this.incomes[11] += parseInt(entry.amount) : this.expenses[11] += parseInt(entry.amount); break;
+              case 1: entry.amount > 0 ? this.incomes[0] += parseInt(entry.amount) : this.expenses[0] += parseInt(entry.amount)*-1; break;
+              case 2: entry.amount > 0 ? this.incomes[1] += parseInt(entry.amount) : this.expenses[1] += parseInt(entry.amount)*-1; break;
+              case 3: entry.amount > 0 ? this.incomes[2] += parseInt(entry.amount) : this.expenses[2] += parseInt(entry.amount)*-1; break;
+              case 4: entry.amount > 0 ? this.incomes[3] += parseInt(entry.amount) : this.expenses[3] += parseInt(entry.amount)*-1; break;
+              case 5: entry.amount > 0 ? this.incomes[4] += parseInt(entry.amount) : this.expenses[4] += parseInt(entry.amount)*-1; break;
+              case 6: entry.amount > 0 ? this.incomes[5] += parseInt(entry.amount) : this.expenses[5] += parseInt(entry.amount)*-1; break;
+              case 7: entry.amount > 0 ? this.incomes[6] += parseInt(entry.amount) : this.expenses[6] += parseInt(entry.amount)*-1; break;
+              case 8: entry.amount > 0 ? this.incomes[7] += parseInt(entry.amount) : this.expenses[7] += parseInt(entry.amount)*-1; break;
+              case 9: entry.amount > 0 ? this.incomes[8] += parseInt(entry.amount) : this.expenses[8] += parseInt(entry.amount)*-1; break;
+              case 10: entry.amount > 0 ? this.incomes[9] += parseInt(entry.amount) : this.expenses[9] += parseInt(entry.amount)*-1; break;
+              case 11: entry.amount > 0 ? this.incomes[10] += parseInt(entry.amount) : this.expenses[10] += parseInt(entry.amount)*-1; break;
+              case 12: entry.amount > 0 ? this.incomes[11] += parseInt(entry.amount) : this.expenses[11] += parseInt(entry.amount)*-1; break;
             }
           });
-          console.log(this.incomes[0]);
         }
       },
       error => { }

@@ -8,7 +8,11 @@ import { Project } from '../../../models/Project';
 import { ProjectCategoryService } from '../../../services/projectcategory.service';
 import { ProjectCategory } from '../../../models/ProjectCategory';
 
-import { UserService } from '../../../@core/data/users.service';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../models/User';
+
+import { TeamMemberService } from '../../../services/teammember.service';
+import { TeamMember } from '../../../models/TeamMember';
 
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 
@@ -151,7 +155,7 @@ export class ImageViewComponent implements ViewCell, OnInit {
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './smart-table.component.html',
-  providers: [ProjectService, ProjectCategoryService],
+  providers: [ProjectService, ProjectCategoryService, UserService, TeamMemberService],
   styleUrls: ['./smart-table.component.scss'],
 })
 
@@ -194,8 +198,15 @@ export class SmartTableComponent {
       },
       team: {
         title: 'Team',
-        type: 'custom',
-        renderComponent: ImageViewComponent
+        type: 'html',
+        valuePrepareFunction: (cell, row) => {
+          var team = new Array;
+          for(var i=0; i<this.teammembers.length; i++) {
+            if(this.teammembers[i].project_name == row.name)
+            team.push(`<span class="badge badge-info">${this.teammembers[i].username}</span>`);  
+          }
+          return team;
+        }
       },
       progres: {
         title: 'Progress',
@@ -213,9 +224,13 @@ export class SmartTableComponent {
   public categories: Array<ProjectCategory>;
   public project_register: Project;
   public user: any;
+  public users: Array<User>; 
+  public teammembers: Array<TeamMember>; 
+
   constructor(
     private _projectCategoryService: ProjectCategoryService,
-    private userService: UserService,
+    private _userService: UserService,
+    private _teammemberService: TeamMemberService,
     private service: SmartTableService,
     private _projectService: ProjectService,
     private themeService: NbThemeService,
@@ -223,6 +238,9 @@ export class SmartTableComponent {
 
     this.project_register = new Project('', '', '', '', '');
     this.projects = new Array<Project>();
+    this.users = new Array<User>();
+    this.teammembers = new Array<TeamMember>();
+
     this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
       this.themeName = theme.name;
       this.init(theme.variables);
@@ -230,8 +248,33 @@ export class SmartTableComponent {
 
     this.getCategoyData();
     this.getData();
+    this.getDataUsers();
+    this.getDataTeamMember();
 
+  }
 
+  getDataTeamMember() {
+    this._teammemberService.list().subscribe(
+      response => {
+        if (!response.teammembers) { } else {
+          let teammembers = response.teammembers;
+          this.teammembers = teammembers;
+        }
+      },
+      error => { }
+    );
+  }
+
+  getDataUsers() {
+    this._userService.list().subscribe(
+      response => {
+        if (!response.users) { } else {
+          let users = response.users;
+          this.users = users;
+        }
+      },
+      error => { }
+    );
   }
 
   open(event) {

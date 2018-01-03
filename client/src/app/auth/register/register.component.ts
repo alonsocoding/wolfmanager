@@ -5,10 +5,14 @@
  */
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/User';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'nb-register',
   styleUrls: ['./register.component.scss'],
+  providers: [UserService],
   template: `
   <img src="../../../assets/images/wolf.png" class="img-icon"/> <br>
       <h2 class="title">Sign Up to Wolf Manager</h2>
@@ -17,19 +21,19 @@ import { Router } from '@angular/router';
       <div class="form-group row">
       <label for="inputTitle" class="col-sm-3 col-form-label">First Name</label>
       <div class="col-sm-9">
-        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your first name">
+        <input [(ngModel)]="user_register.first_name" name="title" type="name" class="form-control" id="inputFinanceCategory2" placeholder="Enter your first name">
       </div>
     </div>
     <div class="form-group row">
       <label for="inputTitle" class="col-sm-3 col-form-label">Last Name</label>
       <div class="col-sm-9">
-        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your last name">
+        <input [(ngModel)]="user_register.last_name" name="title" type="name" class="form-control" id="inputFinanceCategory3" placeholder="Enter your last name">
       </div>
     </div>
     <div class="form-group row">
       <label for="inputTitle" class="col-sm-3 col-form-label">Username</label>
       <div class="col-sm-9">
-        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your username">
+        <input [(ngModel)]="user_register.username" name="title" type="name" class="form-control" id="inputFinanceCategory4" placeholder="Enter your username">
       </div>
     </div>
 
@@ -37,7 +41,7 @@ import { Router } from '@angular/router';
         <label for="inputTitle" class="col-sm-3 col-form-label">Email</label>
       <div class="col-sm-9">
           <label for="input-email" class="sr-only">Email address</label>
-          <input name="email" [(ngModel)]="user.email" id="input-email" #email="ngModel"
+          <input name="email" [(ngModel)]="user_register.email" id="input-email" #email="ngModel"
                  class="form-control" placeholder="Email address" pattern=".+@.+\..+"
                  [class.form-control-danger]="email.invalid && email.touched"
                  [required]="getConfigValue('forms.validation.email.required')">
@@ -55,7 +59,7 @@ import { Router } from '@angular/router';
         <label for="inputTitle" class="col-sm-3 col-form-label">Password</label>
       <div class="col-sm-9">
           <label for="input-password" class="sr-only">Password</label>
-          <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
+          <input name="password" [(ngModel)]="user_register.password" type="password" id="input-password"
                  class="form-control" placeholder="Password" #password="ngModel"
                  [class.form-control-danger]="password.invalid && password.touched"
                  [required]="getConfigValue('forms.validation.password.required')"
@@ -79,7 +83,7 @@ import { Router } from '@angular/router';
       <div class="col-sm-9">
           <label for="input-re-password" class="sr-only">Repeat password</label>
           <input
-            name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
+            name="rePass" [(ngModel)]="confirmPassword" type="password" id="input-re-password"
             class="form-control" placeholder="Confirm Password" #rePass="ngModel"
             [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched"
             [required]="getConfigValue('forms.validation.password.required')">
@@ -97,7 +101,7 @@ import { Router } from '@angular/router';
         <div class="form-group row">
       <label for="inputTitle" class="col-sm-3 col-form-label">Role</label>
       <div class="col-sm-9">
-        <input name="title" type="name" class="form-control" id="inputFinanceCategory" placeholder="Enter your role">
+        <input [(ngModel)]="user_register.role" name="title" type="name" class="form-control" id="inputFinanceCategory5" placeholder="Enter your role">
       </div>
     </div>
 
@@ -129,13 +133,30 @@ export class NgxRegisterComponent {
   submitted = false;
   errors: string[] = [];
   messages: string[] = [];
-  user: any = {};
+  
+  public user_register: User;
 
-  constructor() {
+  constructor(private _userService: UserService,
+    private _router: Router) {
+    this.user_register = new User('','','','','','');
   }
 
   register(): void {
-
+    this._userService.insert(this.user_register).subscribe(
+      response => {
+        let user = response.user;
+        swal({
+          type: 'success',
+          title: 'Sign Up Success',
+          showConfirmButton: false,
+        })
+        if (!user) { } else {
+          this.user_register = user;
+          this.user_register = new User('', '','','','','');
+        }
+      },
+      error => { }
+    );
   }
 
   getConfigValue(key: string): any {

@@ -17,9 +17,10 @@ export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
 
   public user: User;
-
+  public name;
   userMenu = [{
-    title: 'Profile',
+    title: 'Settings',
+    link: '/pages/settings',
   }, {
     title: 'Log out',
     link: '/auth/login',
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.name = this.user.first_name + " " + this.user.last_name;
   }
 
   toggleSidebar(): boolean {

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   selector: 'nb-request-password-page',
   styleUrls: ['./request-password.component.scss'],
   template: `
+  <img src="../../../assets/images/wolf.png" class="img-icon"/> <br>
       <h2 class="title">Forgot Password</h2>
       <small class="form-text sub-title">Enter your email adress and we’ll send a link to reset your password</small>
       <form (ngSubmit)="requestPass()" #requestPassForm="ngForm">

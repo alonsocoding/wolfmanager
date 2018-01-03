@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   selector: 'nb-reset-password-page',
   styleUrls: ['./reset-password.component.scss'],
   template: `
+  <img src="../../../assets/images/wolf.png" class="img-icon"/> <br>
       <h2 class="title">Change password</h2>
       <small class="form-text sub-title">Please enter a new password</small>
       <form (ngSubmit)="resetPass()" #resetPassForm="ngForm">
