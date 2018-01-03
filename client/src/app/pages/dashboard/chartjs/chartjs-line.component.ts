@@ -45,12 +45,12 @@ export class ChartjsLineComponent implements OnDestroy {
                  'August','September','October',
                  'November','December'],
         datasets: [{
-          data: this.expenses,//[65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40],
+          data: /*this.expenses,*/[6500, 5900, 8000, 8100, 5600, 5500, 5700, 4200, 4100, 4600, 5000, 4000],
           label: 'Expenses',
           backgroundColor: NbColorHelper.hexToRgbA(colors.info, 0.3),
           borderColor: colors.info,
         }, {
-          data: this.incomes,//[28, 48, 40, 19, 86, 27, 90, 40, 19, 86, 27, 90],
+          data: /*this.incomes,*/[2800, 4800, 4000, 1900, 8600, 2700, 9300, 4030, 1700, 8620, 2300, 3000],
           label: 'Incomes',
           backgroundColor: NbColorHelper.hexToRgbA(colors.success, 0.3),
           borderColor: colors.success,
