@@ -110,7 +110,6 @@ export class NgxLoginComponent {
           swal({
             type: 'error',
             title: 'The identity is incorrect',
-            showConfirmButton: false,
           })
         } else {
           let user = response;
@@ -122,7 +121,6 @@ export class NgxLoginComponent {
             swal({
               type: 'error',
               title: 'The password is incorrect',
-              showConfirmButton: false,
             })
           }
           
@@ -132,7 +130,6 @@ export class NgxLoginComponent {
         swal({
           type: 'error',
           title: 'The email is incorrect',
-          showConfirmButton: false,
         })
       }
     );

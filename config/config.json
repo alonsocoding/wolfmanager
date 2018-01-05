@@ -1,10 +1,10 @@
 {
   "development": {
-    "use_env_variable": "DATABASE_URL",
-    "username": "plgjzrpalsrzbz",
-    "password": "542eaf52978d0b538a0ef852df561bd3cfeb9d29f4e0ee8266e7ff64c770ae2e",
-    "database": "d9cs05iuorq4i",
-    "host": "ec2-54-243-61-173.compute-1.amazonaws.com",
+    "username": "josedelgado",
+    "password": "macros98",
+    "database": "todos",
+    "host": "127.0.0.1",
+    "port": 5432,
     "dialect": "postgres"
   },
   "test": {
@@ -16,11 +16,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
-    "username": "plgjzrpalsrzbz",
-    "password": "542eaf52978d0b538a0ef852df561bd3cfeb9d29f4e0ee8266e7ff64c770ae2e",
-    "database": "d9cs05iuorq4i",
-    "host": "ec2-54-243-61-173.compute-1.amazonaws.com",
+    "username": "josedelgado",
+    "password": "macros98",
+    "database": "todos",
+    "host": "127.0.0.1",
+    "port": 5432,
     "dialect": "postgres"
   }
 }

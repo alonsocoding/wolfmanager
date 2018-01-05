@@ -1,0 +1,23 @@
+Requirements:
+
+1) Install PostgreSQL and to use your own database, change the file config/config.json with your database name and port
+
+PD: You can also use MySQL, SQL server, etc. only change the models and Sequelize work with them the same way
+
+Follow the instructions and in the cmd run the commands
+
+1) Install Angular CLI with package NPM to install the dependencies of this project
+    
+    > npm install -g @angular/cli
+
+2) Install the dependencies of server side inside the folder 'wolfmanager', after finish start
+
+    > npm install
+    > npm start 
+
+3) Install the dependencies of client side inside the folder 'wolfmanager/client', after finish start
+
+    > npm install
+    > npm start
+
+4) Enter to localhost:4200 and the page is running 

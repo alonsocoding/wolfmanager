@@ -123,7 +123,7 @@ NgxAuthComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'nb-auth',
         styles: [__webpack_require__("../../../../../src/app/auth/auth.component.scss")],
-        template: "\n    <nb-layout>\n      <nb-layout-column>\n        <nb-card>\n          <nb-card-body>\n            <div class=\"flex-centered col-xl-12 col-lg-12 col-md-12 col-sm-12\">\n              <router-outlet></router-outlet>\n            </div>\n          </nb-card-body>\n        </nb-card>\n      </nb-layout-column>\n    </nb-layout>\n  ",
+        template: "\n    <nb-layout>\n      <nb-layout-column>\n      <div class=\"flex-centered col-xl-12 col-lg-12 col-md-12 col-sm-12\">\n              <h3>Demo Credentials: </h3>\n                  <p>Email: admin@admin.com</p>\n                  <p>Password: admin</p>\n            </div>\n        <nb-card>\n          <nb-card-body>\n            <div class=\"flex-centered col-xl-12 col-lg-12 col-md-12 col-sm-12\">\n              <router-outlet></router-outlet>\n            </div>\n          </nb-card-body>\n        </nb-card>\n      </nb-layout-column>\n    </nb-layout>\n  ",
     }),
     __metadata("design:paramtypes", [])
 ], NgxAuthComponent);

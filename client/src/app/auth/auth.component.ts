@@ -11,6 +11,11 @@ import { Component, OnDestroy } from '@angular/core';
   template: `
     <nb-layout>
       <nb-layout-column>
+      <div class="flex-centered col-xl-12 col-lg-12 col-md-12 col-sm-12">
+              <h3>Demo Credentials: </h3>
+                  <p>Email: admin@admin.com</p>
+                  <p>Password: admin</p>
+            </div>
         <nb-card>
           <nb-card-body>
             <div class="flex-centered col-xl-12 col-lg-12 col-md-12 col-sm-12">

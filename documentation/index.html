@@ -1,0 +1,428 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Documentation Wolf Manager</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p,
+		table,
+		hr,
+		.box {
+			margin-bottom: 25px;
+		}
+
+		ul {
+			list-style-type: none;
+		}
+
+		img {
+			width: 100px;
+			height: 100px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+
+		.box p {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+
+		<h3 class="center alt">Wolf Manager Documentation by SomeSoft v1.0</h3>
+
+		<hr>
+
+		<h1 class="center">Wolf Manager</h1>
+
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+						Created: 01/04/2018
+						<br> Last Update: 01/04/2018
+						<br> By: Jose Delgado Matamoros
+						<br> Demo URL:
+						<a href="https://wolfmanager.herokuapp.com">https://wolfmanager.herokuapp.com</a>
+						<br> Email:
+						<a href="mailto:alonsodelm@gmail.com">alonsodelm@gmail.com</a>
+					</strong>
+				</p>
+			</div>
+			<!-- end div .span-6 -->
+
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing my app. If you have any questions that are beyond the scope of this help file, please feel free
+					to email via my user page contact form
+					<a href="https://codecanyon.net/user/somesoft">here</a>. Thanks so much!</p>
+			</div>
+		</div>
+		<!-- end div .borderTop -->
+
+		<hr>
+
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li>
+				<a href="#features">Features</a>
+			</li>
+			<li>
+				<a href="#server">Server Side</a>
+			</li>
+			<li>
+				<a href="#api">API Restfull</a>
+			</li>
+			<li>
+				<a href="#client">Client Side</a>
+			</li>
+			<li>
+				<a href="#htmlStructure">HTML Structure</a>
+			</li>
+			<li>
+				<a href="#cssFiles">SCSS Files and Structure</a>
+			</li>
+			<li>
+				<a href="#javascript">JavaScript</a>
+			</li>
+			<li>
+				<a href="#credits">Sources and Credits</a>
+			</li>
+		</ol>
+
+		<hr>
+		<h3 id="features">
+			<strong>A) Features</strong> -
+			<a href="#toc">top</a>
+		</h3>
+		<p>This application includes the features of most of project management software: </p>
+		<ul>
+			<li>
+				<h3>Dashboard</h3>
+				<p>This module is designed to help managers to take decisions by showing them the most important information that the web
+					app is generating, data like a chart for the financial status, that include the expenses and the increses, also the
+					current tasks, some contacts to make faster chat and little number of projects that you have create.</p>
+			</li>
+			<li>
+				<h3>Projects</h3>
+				<p>This is the main module, to create projects that will have all the information necesarry, to create a new project first
+					you have to make a category, rather be new, in progress, cancelled, complete, etc. So after you create the category
+					you go to All Projects and click on new project enter all the information and click on save, after that the table is
+					going to refresh automatically and you will be able to see, update, and delete.</p>
+			</li>
+			<li>
+				<h3>Tasks</h3>
+				<p>After the creation of a project you can start creating new Tasks for that project or any other, in this module you will
+					have to options to see all of your assigned tasks or all the existing tasks, in this case to create a new one, just
+					click on new task and enter the information, click on save and the table is going to refresh automatically and you will
+					be able to see, update, and delete.</p>
+			</li>
+			<li>
+				<h3>Teams</h3>
+				<p>The team module is important to keep the information of all the employees that work for a project and what tasks they
+					have, so first include a new member to the web app, go to Members and click new Member enter the information of the
+					user and then go to Team Roles to create a new role, this is to give a user the permissions that he can have, for example
+					user can see projects but cant add new team members, after that go to All Teams and click on new team member, choose
+					the member you create and the project that works on, and give that user the role it has.</p>
+			</li>
+			<li>
+				<h3>Finance</h3>
+				<p>In project management it is important to keep the financial status of every entry of the project so in this module it
+					is included an entry category, so first go to Categories and create a new type, and then create a new Entry by going
+					to Finance and create new entry, enter the information with the amount of money and the category of entry, and save
+					it, after that the table is going to refresh automatically and you will be able to see, update, and delete.</p>
+			</li>
+			<li>
+				<h3>Notes</h3>
+				<p>It is always important to take notes of important information that can help us or the team in the future so the notes
+					module will have your personal notes, and also the notes of the projects, to the employees to know when a note is created,
+					everything you do is go to All Notes, create new note and enter the information, after that the table is going to refresh
+					automatically and you will be able to see, update, and delete.</p>
+			</li>
+			<li>
+				<h3>Maps</h3>
+				<p>This module was to look over different locations to know important aspects like where are the project is going to be
+					develop, if there are other locations the company can use, where are the competitions and how can we keep in track of
+					the services the company is going to offer with the creation of the project that and more.</p>
+			</li>
+			<li>
+				<h3>Settings</h3>
+				<p>This module is only to modify your own personal information, this kind of information is the one your employees are going
+					to see, so the user most have the chance to update the information in case it is necessary</p>
+			</li>
+		</ul>
+		<hr>
+		<h3 id="server">
+			<strong>B) Server Side</strong> -
+			<a href="#toc">top</a>
+		</h3>
+		<h6>This app server side was develop with three new technologies, PostgreSQL, Sequelize and Upload to web with Heroku: </h6>
+		<ul>
+			<li>
+				<img src="./assets/images/postgresql.png" />
+				<br>
+				<p>
+					<a target="_blank" href="https://www.postgresql.org/docs/">Documentation. </a>PostgreSQL is a powerful, open source object-relational database system. It has more than 15 years
+					of active development and a proven architecture that has earned it a strong reputation for reliability, data integrity,
+					and correctness. It runs on all major operating systems, including Linux, UNIX (AIX, BSD, HP-UX, macOS, Solaris), and
+					Windows. It is fully ACID compliant, has full support for foreign keys, joins, views, triggers, and stored procedures
+					(in multiple languages). </p>
+
+				<p>It includes most SQL:2008 data types, including INTEGER, NUMERIC, BOOLEAN, CHAR, VARCHAR, DATE, INTERVAL , and TIMESTAMP.
+					It also supports storage of binary large objects, including pictures, sounds, or video. It has native programming interfaces
+					for C/C++, Java, .Net, Perl, Python, Ruby, Tcl, ODBC, among others</p>
+			</li>
+			<li>
+				<img src="./assets/images/sequelize.png" />
+				<br>
+				<p>
+					<a target="_blank" href="http://docs.sequelizejs.com/">Documentation. </a>Sequelize.js is an ORM (Object/Relational Mapper) which provides easy access to MySQL, MariaDB, SQLite
+					or PostgreSQL databases by mapping database entries to objects and vice versa. It has very powerful migrations mechanism
+					that can transform existing database schema into a new version. It also provides database synchronization mechanisms
+					that can create database structure by specifying the model structure.</p>
+				<p>Although Sequelize.js is new library, it have been battle tested. Currently web sites like Shutterstock, Clevertech,
+					Metamarkets and Innofluence have announced that they are using Sequelize.js as ORM of their website.</p>
+			</li>
+			<li>
+				<img src="./assets/images/heroku.png" />
+				<br>
+				<p>
+					<a target="_blank" href="https://devcenter.heroku.com/categories/reference">Documentation. </a>Heroku is a container-based cloud Platform as a Service (PaaS). Developers use Heroku to deploy,
+					manage, and scale modern apps. Our platform is elegant, flexible, and easy to use, offering developers the simplest
+					path to getting their apps to market.</p>
+
+				<p>provides a SQL database-as-a-service that lets you focus on building your application instead of messing around with
+					database management.
+				</p>
+			</li>
+		</ul>
+		<hr>
+
+		<h3 id="api">
+			<strong>C) API Restfull</strong> -
+			<a href="#toc">top</a>
+		</h3>
+		<ul>
+			<h5>Project Routes</h5>
+			<li>/project/list - List all the projects</li>
+			<li>/project/list-tasks - List all the projects and tasks</li>
+			<li>/project/insert - Insert a new project</li>
+			<li>/project/update/:projectId - Update a project with id</li>
+			<li>/project/delete/:projectId - Delete a project with id</li>
+			<hr>
+			<h5>Task Routes</h5>
+			<li>/task/list - List all the tasks</li>
+			<li>/task/insert - Insert a new task</li>
+			<li>/task/update/:taskId - Update a task with id</li>
+			<li>/task/delete/:taskId - Delete a task with id</li>
+
+			<hr>
+			<h5>Team Routes</h5>
+			<li>/team/list - List all the teams</li>
+			<li>/team/insert - Insert a new team</li>
+			<li>/team/update/:teamId - Update a team with id</li>
+			<li>/team/delete/:teamId - Delete a team with id</li>
+			<hr>
+			<h5>Finance Routes</h5>
+			<li>/finance/list - List all the finances</li>
+			<li>/finance/insert - Insert a new finance</li>
+			<li>/finance/update/:financeId - Update a finance with id</li>
+			<li>/finance/delete/:financeId - Delete a finance with id</li>
+
+			<hr>
+			<h5>Note Routes</h5>
+			<li>/note/list - List all the notes</li>
+			<li>/note/insert - Insert a new note</li>
+			<li>/note/update/:noteId - Update a note with id</li>
+			<li>/note/delete/:noteId - Delete a note with id</li>
+		</ul>
+
+		<hr>
+		<h3 id="client">
+			<strong>D) Client Side</strong> -
+			<a href="#toc">top</a>
+		</h3>
+
+		<ul>
+			<li>
+				<img src="./assets/images/angular.png" />
+				<br>
+				<p>
+					<a target="_blank" href="https://angular.io/docs">Documentation. </a>Angular is a platform that makes it easy to build applications with the web. Angular combines declarative
+					templates, dependency injection, end to end tooling, and integrated best practices to solve development challenges.
+					Angular empowers developers to build applications that live on the web, mobile, or the desktop</p>
+				<p>The documentation assumes that you are already familiar with JavaScript, and some of the tools from the latest standards
+					such as classes and modules. The code samples are written using TypeScript. Most Angular code can be written with just
+					the latest JavaScript, using types for dependency injection, and using decorators for metadata.
+				</p>
+			</li>
+			<li>
+				<img src="./assets/images/typescript.png" />
+				<br>
+				<p>
+					<a target="_blank" href="https://www.typescriptlang.org/docs/home.html">Documentation. </a>TypeScript starts from the same syntax and semantics that millions of JavaScript developers know
+					today. Use existing JavaScript code, incorporate popular JavaScript libraries, and call TypeScript code from JavaScript.</p>
+				<p>TypeScript compiles to clean, simple JavaScript code which runs on any browser, in Node.js, or in any JavaScript engine
+					that supports ECMAScript 6 (or newer).</p>
+			</li>
+			<li>
+				<img src="./assets/images/nebular.png" />
+				<br>
+				<p>
+					<a target="_blank" href="https://akveo.github.io/nebular/#/docs/getting-started/what-is-nebular">Documentation. </a>Nebular's primary goal is to assemble together and connect the most awesome features and libraries
+					creating an efficient ecosystem to speed up and simpify the development. carefully crafted the most important components
+					you need to bootstrap your development. Our UI Kit is framework-agnostic, though you could mix it with a CSS-framework
+					of your choice. 2 built-in themes + hundreds of variables to create your own. Multiple themes with hot reload out of
+					the box. </p>
+			</li>
+			<li>
+				<img src="./assets/images/sass.png" />
+				<br>
+				<p>
+					<a target="_blank" href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">Documentation. </a>Sass is completely compatible with all versions of CSS. We take this compatibility seriously, so
+					that you can seamlessly use any available CSS libraries. Sass boasts more features and abilities than any other CSS
+					extension language out there. The Sass Core Team has worked endlessly to not only keep up, but stay ahead. Sass has
+					been actively supported for over 10 years by its loving Core Team. Over and over again, the industry is choosing Sass
+					as the premier CSS extension language. Sass is actively supported and developed by a consortium of several tech companies
+					and hundreds of developers. There are an endless number of frameworks built with Sass. Compass, Bourbon, and Susy just
+					to name a few.</p>
+			</li>
+		</ul>
+		<hr>
+		<h3 id="htmlStructure">
+			<strong>E) HTML Structure</strong> -
+			<a href="#toc">top</a>
+		</h3>
+
+		<p>The overall HTML of the Template is distributed into different separate files. Inside the components folder, You can find
+				the following HTML files.</p>
+			<h6>Pages Folder</h6>
+			<ul>
+				<li>dashboard.component.html</li>
+				<li>projects.component.html</li>
+				<li>tasks.component.html</li>
+				<li>finances.component.html</li>
+				<li>teams.component.html</li>
+				<li>notes.component.html</li>
+				<li>settings.component.html</li>
+			</ul>
+			</ul>
+
+
+		<hr>
+
+		<h3 id="cssFiles">
+			<strong>F) CSS Files and Structure</strong> -
+			<a href="#toc">top</a>
+		</h3>
+
+		<p>This application is using a CSS library theme default of
+			<a href="https://akveo.github.io/nebular/#/docs/getting-started/what-is-nebular">Nebular</a>. Many browser interpret the default nebular component behavior of html elements differently. By using a general
+			reset CSS file, we can work round this. This file also contains some general styling, such as anchor tag colors, font-sizes,
+			etc. Keep in mind, that these values might be overridden somewhere else in the file.</p>
+		<p>The overall SCSS of the Template is distributed into different separate files. Inside the components folder, You can find
+			the following SCSS files.</p>
+		<h6>Pages Folder</h6>
+		<ul>
+			<li>dashboard.component.scss</li>
+			<li>projects.component.scss</li>
+			<li>tasks.component.scss</li>
+			<li>finances.component.scss</li>
+			<li>teams.component.scss</li>
+			<li>notes.component.scss</li>
+			<li>settings.component.scss</li>
+		</ul>
+		<h6>Auth Folder</h6>
+		<ul>
+			<li>login.component.scss</li>
+			<li>register.component.scss</li>
+			<li>request-password.component.scss</li>
+			<li>reset-password.component.scss</li>
+		</ul>
+
+		<hr>
+
+		<h3 id="javascript">
+			<strong>G) JavaScript</strong> -
+			<a href="#toc">top</a>
+		</h3>
+
+		<p>This application uses Typescript programming language to control the different components.</p>
+
+		<ol>
+			<li>Create a Service to send request to the API Restfull</li>
+			<pre>@Injectable()</pre>
+					<pre>export class ProjectService {</pre>
+					
+						<pre>// Insert a new Project</pre>
+						<pre>insert(project_register) {</pre>
+							<pre>let params = JSON.stringify(project_register);</pre>
+					
+							<pre>let headers = new Headers({'Content-Type':'application/json'});</pre>
+					
+							<pre>return this._http.post(this.url+'project/insert', params, {headers: headers})</pre>
+							<pre>.map(res => res.json());</pre>
+							<pre>}</pre>
+			<li>To first creating a component is really easy, import the service and define the style, html url to use</li>
+				<pre>@Component({</pre>
+						<pre>selector: 'ngx-dashboard',</pre>
+						<pre>providers: [ProjectService, TaskService, UserService, EntryService],</pre>
+						<pre>styleUrls: ['./dashboard.component.scss'],</pre>
+						<pre>templateUrl: './dashboard.component.html',</pre>
+						<pre> })</pre>
+						<pre> export class DashboardComponent {</pre>
+			<li>Make the data binding to use all data from component in the html template</li>
+				<pre>class="contact" *ngFor="let user of users"</pre>
+				<pre>[name]="user.first_name" [title]="user.username" size="large"</pre>
+				<pre>name="file" id="file" [(ngModel)]="project_register.icon"</pre>
+
+		</ol>
+
+		<hr>
+
+		<h3 id="credits">
+			<strong>H) Sources and Credits</strong> -
+			<a href="#toc">top</a>
+		</h3>
+
+		<p>This application uses this different Javascript libraries
+
+			<ul>
+				<li>ng-bootstrap 1.0.0-beta.5</li>
+				<li>angular 4.4.6</li>
+				<li>nebular 2.0.0-rc.3</li>
+				<li>angular2-chartjs 0.3.0</li>
+				<li>ng2-ckeditor 4.6.2</li>
+				<li>ng2-smart-table 1.1.0</li>
+			</ul>
+
+			<hr>
+
+			<p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have
+				any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question
+				relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the "Item Discussion"
+				section.
+			</p>
+
+			<p class="append-bottom alt large">
+				<strong>SomeSoft</strong>
+			</p>
+			<p>
+				<a href="#toc">Go To Table of Contents</a>
+			</p>
+
+			<hr class="space">
+	</div>
+	<!-- end div .container -->
+</body>
+
+</html>
